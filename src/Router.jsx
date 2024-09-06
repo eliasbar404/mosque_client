@@ -13,6 +13,8 @@ import Articles from "./pages/admin/Dashboard/Articles";
 import Events from "./pages/admin/Dashboard/Events";
 import Settings from "./pages/admin/Dashboard/Settings";
 
+import CreateArticles from "./pages/admin/Dashboard/CreateArticles";
+
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,9 @@ const router = createBrowserRouter([
       { path:"/dashboard/users"      ,element: <Users/>},
       { path:"/dashboard/articles"   ,element: <Articles/>},
       { path:"/dashboard/events"     ,element: <Events/>},
-      { path:"/dashboard/settings"   ,element: <Settings/>}
+      { path:"/dashboard/settings"   ,element: <Settings/>},
+
+      { path:"/dashboard/articles/create"   ,element: <CreateArticles/>}
 
     ]
   },

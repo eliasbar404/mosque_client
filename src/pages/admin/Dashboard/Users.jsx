@@ -48,7 +48,7 @@ const Users = () => {
 
     return (
         <div className="mx-10 mt-10 text-lg">
-            <h1 className="font-extrabold">Users List:</h1>
+            <h1 className="font-bold text-3xl font-mono text-center">Users List</h1>
 
             {/* Search Input */}
             <div className="mt-4 mb-6">

@@ -1,7 +1,7 @@
 import { Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger } from "@/components/ui/sheet"
 // import icons
 import { LayoutDashboard,House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut} from "lucide-react";
-import { Outlet , Link} from "react-router-dom";
+import { Link} from "react-router-dom";
 const data = [
     {icon:<House/>,        title:"Home",      link:"/dashboard"},
     {icon:<UserRoundPen />,title:"Profile",   link:"/dashboard/profile"},
@@ -16,7 +16,7 @@ const data = [
 const Sidebar = () => {
     return (
         <Sheet>
-            <div className="shadow-lg py-1 px-2">
+            <div className="shadow-lg py-1 px-2 bg-white fixed w-full">
                 <SheetTrigger><LayoutDashboard size={32} className="font-black"/></SheetTrigger>
             </div>
             
@@ -31,9 +31,6 @@ const Sidebar = () => {
                 </SheetHeader>
             </SheetContent>
 
-            <div className="p-2">
-                <Outlet/>
-            </div>
         </Sheet>
 )
 }
@@ -50,7 +47,7 @@ export const CustomLink = (props)=>{
             {/* eslint-disable-next-line react/prop-types */}
             <span>{props.data.icon}</span>
             {/* eslint-disable-next-line react/prop-types */}
-            <span>{props.data.title}</span>
+            <span className="font-mono font-black">{props.data.title}</span>
         </Link>
     )
 }
