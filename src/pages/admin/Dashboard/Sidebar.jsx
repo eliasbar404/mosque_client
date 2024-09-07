@@ -1,5 +1,6 @@
 import { Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger } from "@/components/ui/sheet"
 // import icons
+import { useAdminLogin } from "../../../hooks/useAdminLogin";
 import { LayoutDashboard,House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut} from "lucide-react";
 import { Link} from "react-router-dom";
 const data = [
@@ -9,11 +10,13 @@ const data = [
     {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
     {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
     {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
-    {icon:<LogOut/>,       title:"Logout",    link:"/logout"},
+    // {icon:<LogOut/>,       title:"Logout",},
 ];
 
 
 const Sidebar = () => {
+    const {logout} = useAdminLogin();
+    
     return (
         <Sheet>
             <div className="shadow-lg py-1 px-2 bg-white fixed w-full">
@@ -27,6 +30,11 @@ const Sidebar = () => {
                             <SheetTitle key={index}><CustomLink data={val}/></SheetTitle>
                         ))
                     }
+
+                    <Link onClick={()=>logout()}  className="flex gap-2 p-2 rounded-md cursor-pointer hover:bg-slate-100 hover:text-blue-900" >
+                        <span><LogOut/></span>
+                        <span className="font-mono font-black text-lg">Logout</span>
+                    </Link>
                     
                 </SheetHeader>
             </SheetContent>
@@ -40,10 +48,11 @@ export default Sidebar
 
 
 export const CustomLink = (props)=>{
+    // const {logout} = useAdminLogin();
     return (
         
         // eslint-disable-next-line react/prop-types
-        <Link to={props.data.link} className="flex gap-2 p-2 rounded-md cursor-pointer hover:bg-slate-100 hover:text-blue-900">
+        <Link to={props.data.link} className="flex gap-2 p-2 rounded-md cursor-pointer hover:bg-slate-100 hover:text-blue-900" >
             {/* eslint-disable-next-line react/prop-types */}
             <span>{props.data.icon}</span>
             {/* eslint-disable-next-line react/prop-types */}
