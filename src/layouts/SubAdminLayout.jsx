@@ -1,10 +1,10 @@
 import  { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For redirection
-import { useAdminLogin } from '../hooks/useAdminLogin'; // Adjust the import path if necessary
+import { useSubAdminLogin } from '../hooks/useSubAdminLogin'; // Adjust the import path if necessary
 
 // eslint-disable-next-line react/prop-types
-const AdminLayout = ({ children }) => {
-    const { isLoggedIn, loading } = useAdminLogin();
+const SubAdminLayout = ({ children }) => {
+    const { isLoggedIn, loading } = useSubAdminLogin();
     const [authenticated, setAuthenticated] = useState(isLoggedIn);
     const [authLoading, setAuthLoading] = useState(true);
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ const AdminLayout = ({ children }) => {
         const verifyUser = async () => {
             try {
                 // Check if user is authenticated using the token
-                const response = await fetch('http://localhost:8000/api/admin/auth/me', {
+                const response = await fetch('http://localhost:8000/api/subadmin/auth/me', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -27,12 +27,12 @@ const AdminLayout = ({ children }) => {
                 } else {
                     // If response is not OK, user is not authenticated
                         setAuthenticated(false);
-                        navigate('/admin'); // Redirect to login page
+                        navigate('/subadmin'); // Redirect to login page
                 }} 
             catch (error) {
                 console.error('Error verifying user:', error);
                 setAuthenticated(false);
-                navigate('/admin'); // Redirect to login page
+                navigate('/subadmin'); // Redirect to login page
             } 
             finally {
                     setAuthLoading(false);
@@ -64,4 +64,4 @@ return (
 );
 };
 
-export default AdminLayout;
+export default SubAdminLayout;

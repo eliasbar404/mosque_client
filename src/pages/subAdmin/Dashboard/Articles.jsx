@@ -1,0 +1,136 @@
+import { useState } from 'react';
+import { Link } from "react-router-dom"
+import {FilePlus ,BookPlus ,FilePenLine,Trash2} from "lucide-react"
+const articles = [
+    {title: "Introduction to JavaScript",imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTewFJxkgofm7SIekFKMBs0vJIWqwJjno3K5g&s",views: 1250,publishedAt: null,status: "published"},
+    {title: "Understanding Asynchronous JavaScript",imageUrl: "https://images.unsplash.com/photo-1619687248404-7f38c79e5d8b",views: 890,publishedAt: "2024-08-25T14:00:00Z",status: "published"},
+    {title: "The Basics of React",imageUrl: "https://images.unsplash.com/photo-1552564705-b7d4e747e451",views: 560,publishedAt: "2024-08-20T09:30:00Z",status: "published"},
+    {title: "How to Use Promises in JavaScript",imageUrl: "https://images.unsplash.com/photo-1581091012188-2e06c78d4622",views: 320,publishedAt: "2024-08-15T11:45:00Z",status: "draft"},
+    {title: "Understanding Closures",imageUrl: "https://images.unsplash.com/photo-1552564705-b7d4e747e451",views: 410,publishedAt: "2024-08-10T08:00:00Z",status: "published"}
+];
+
+const Articles = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    // eslint-disable-next-line no-unused-vars
+    const [articlesPerPage, setArticlesPerPage] = useState(10); // You can change the default value
+
+    // Filter users based on the search query
+    const filteredUsers = articles.filter(article =>
+        `${article.title}`.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Calculate the users to display based on pagination
+    const indexOfLastUser = currentPage * articlesPerPage;
+    const indexOfFirstUser = indexOfLastUser - articlesPerPage;
+    const currentArticles = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    const totalPages = Math.ceil(filteredUsers.length / articlesPerPage);
+
+    // Handle page change
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    return (
+    <div className="mx-10 mt-10 text-lg flex flex-col gap-5">
+        
+        <h1 className="text-3xl font-mono font-black text-center">Articles List</h1>
+
+        <Link className="inline-flex self-start gap-2 px-3 py-2 font-mono rounded-md font-bold text-slate-50 bg-green-500 hover:bg-green-800" to={"/dashboard/articles/create"}><FilePlus />Create a new Article</Link>
+
+{/* Search Input */}
+<div className="mt-4 mb-6">
+    <input
+        type="text"
+        placeholder="Search by name..."
+        className="border border-gray-400 rounded p-2 w-full"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Update search query
+    />
+</div>
+
+<div className="font-[sans-serif] overflow-x-auto">
+    <table className="min-w-full bg-white">
+        <thead className="whitespace-nowrap">
+            <tr>
+                <th className="p-4 text-left text-sm font-semibold text-black">Title</th>
+                {/* <th className="p-4 text-left text-sm font-semibold text-black">Published At</th> */}
+                <th className="p-4 text-left text-sm font-semibold text-black">View</th>
+                <th className="p-4 text-left text-sm font-semibold text-black">Action</th>
+            </tr>
+        </thead>
+
+        <tbody className="whitespace-nowrap">
+            {
+                currentArticles.map((val, index) => (
+                    <tr key={index} className="odd:bg-blue-50">
+                        <td className="p-4 text-sm">
+                            <div className="flex items-center cursor-pointer w-max">
+                                <img src={val.imageUrl} className="w-20 h-16 rounded-full shrink-0" />
+                                <div className="ml-4">
+                                    <p className="text-base text-black">{val.title}</p>
+                                    <p className="text-xs text-gray-500 mt-0.5">{val.publishedAt}</p>
+                                </div>
+                            </div>
+                        </td>
+                        {/* <td className="p-4 text-sm text-black">
+                            {val.phoneNumber}
+                        </td> */}
+                        <td className="p-4">
+                            {val.views}
+                            {/* <label className="relative cursor-pointer">
+                                <input type="checkbox" className="sr-only peer" defaultChecked={val.status === "active"} />
+                                <div className="w-11 h-6 flex items-center bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:absolute after:left-[2px] peer-checked:after:border-white after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#007bff]"></div>
+                            </label> */}
+                        </td>
+                        <td className="p-4">
+                            {/* publish */}
+                            {
+                                val.publishedAt === null?<button title='Publish'><BookPlus color='green' size={30}/></button>:null
+                            }
+                            
+                            {/* Edit */}
+                            <button title='Edit'>
+                                <FilePenLine color='blue' size={30}/>
+                            </button>
+                            <button title="Delete">
+                                <Trash2 color='red' size={30}/>
+                            </button>
+
+
+                        </td>
+                    </tr>
+                ))
+            }
+
+            {currentArticles.length === 0 && (
+                <tr>
+                    <td colSpan="4" className="p-4 text-sm text-center text-gray-500">
+                        No articles found.
+                    </td>
+                </tr>
+            )}
+        </tbody>
+    </table>
+
+    {/* Pagination Controls */}
+    <div className="flex justify-between items-center mt-4">
+        <p className="text-sm text-gray-500">Showing {indexOfFirstUser + 1} to {Math.min(indexOfLastUser, filteredUsers.length)} of {filteredUsers.length} entries</p>
+        
+        <ul className="flex space-x-2">
+            {Array.from({ length: totalPages }, (_, index) => (
+                <li
+                    key={index + 1}
+                    className={`cursor-pointer text-sm px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                    onClick={() => paginate(index + 1)}
+                >
+                    {index + 1}
+                </li>
+            ))}
+        </ul>
+    </div>
+</div>
+
+    </div>
+)
+}
+
+export default Articles

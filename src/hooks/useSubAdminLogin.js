@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
-export const useAdminLogin = () => {
+export const useSubAdminLogin = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ export const useAdminLogin = () => {
 
     try {
       
-      const response = await fetch(`http://localhost:8000/api/admin/auth/login`, {
+      const response = await fetch(`http://localhost:8000/api/subadmin/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,14 +50,14 @@ export const useAdminLogin = () => {
       
     }
 
-    navigate('/dashboard');
+    navigate('/subadmin/dashboard');
   };
 
   // Function to logout and clear the JWT
   const logout = async() => {
   
             const token =  localStorage.getItem("token");
-            const response = await fetch(`http://localhost:8000/api/admin/auth/logout`, {
+            const response = await fetch(`http://localhost:8000/api/subadmin/auth/logout`, {
                 method: "POST",
                 headers: {
                   Authorization: `Bearer ${token}`,

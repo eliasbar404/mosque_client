@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form"
-import { useAdminLogin } from "../../hooks/useAdminLogin";
+import { useSubAdminLogin } from "../../hooks/useSubAdminLogin";
 import ErrorAlert from "../../components/ErrorAlert";
 
-const AdminLogin = () => {
-  const { login, logout, checkAuth, isLoggedIn, loading, error } = useAdminLogin();
+const SubAdminLogin = () => {
+  const { login,checkAuth} = useSubAdminLogin();
   const {register,handleSubmit,formState: { errors },} = useForm();
 
   const onSubmit = (data) => login(data.email,data.password);
@@ -27,7 +27,7 @@ const AdminLogin = () => {
           
 
           <div className="p-8 rounded-2xl bg-white shadow">
-            <h2 className="text-gray-800 text-center text-2xl font-bold font-mono">Admin Login</h2>
+            <h2 className="text-gray-800 text-center text-2xl font-bold font-mono">Sub Admin Login</h2>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="text-gray-800 text-sm mb-2 block font-mono">Email</label>
@@ -77,4 +77,4 @@ const AdminLogin = () => {
     )
 }
 
-export default AdminLogin
+export default SubAdminLogin
