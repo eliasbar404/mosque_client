@@ -1,12 +1,14 @@
 import { Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger } from "@/components/ui/sheet"
 // import icons
 import { useAdminLogin } from "../../../hooks/useAdminLogin";
-import { LayoutDashboard,House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut} from "lucide-react";
+import { LayoutDashboard,House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut,UserCog} from "lucide-react";
 import { Link} from "react-router-dom";
+import AdminAvatar from "../../../components/AdminAvatar";
 const data = [
     {icon:<House/>,        title:"Home",      link:"/dashboard"},
     {icon:<UserRoundPen />,title:"Profile",   link:"/dashboard/profile"},
-    {icon:<Users />,       title:"Users",     link:"/dashboard/users"},
+    {icon:<UserCog />,     title:"Admins",    link:"/dashboard/admins"},
+    {icon:<Users />,       title:"Members",   link:"/dashboard/members"},
     {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
     {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
     {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
@@ -19,8 +21,11 @@ const Sidebar = () => {
     
     return (
         <Sheet>
-            <div className="shadow-lg py-1 px-2 bg-white fixed w-full">
+            <div className="shadow-lg py-1 px-2 bg-white fixed w-full flex justify-between">
                 <SheetTrigger><LayoutDashboard size={32} className="font-black"/></SheetTrigger>
+                <div>
+                    <AdminAvatar/>
+                </div>
             </div>
             
             <SheetContent side="left" className="w-[300px]">

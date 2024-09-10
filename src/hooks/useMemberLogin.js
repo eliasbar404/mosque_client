@@ -15,7 +15,7 @@ export const useAdminLogin = () => {
 
     try {
       
-      const response = await fetch(`http://localhost:8000/api/admin/auth/login`, {
+      const response = await fetch(`http://localhost:8000/api/member/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,29 +50,45 @@ export const useAdminLogin = () => {
       
     }
 
-    navigate('/dashboard');
+    navigate('/');
   };
 
   // Function to logout and clear the JWT
   const logout = async() => {
-          const token =  localStorage.getItem("token");
-          const response = await fetch(`http://localhost:8000/api/admin/auth/logout`, {
-              method: "POST",
-              headers: {
+  
+            const token =  localStorage.getItem("token");
+            const response = await fetch(`http://localhost:8000/api/member/auth/logout`, {
+                method: "POST",
+                headers: {
                   Authorization: `Bearer ${token}`,
-              },
-          });
+                },
+              });
 
-          if (response) {
-              if (response.status === 200) {
+              if (response) {
+                if (response.status === 200) {
                   // Token is invalid, trigger logout
-                  localStorage.removeItem("token");
-                  setIsLoggedIn(false);
-                  navigate('/');
-              }
-                
-              throw new Error("Failed to fetch user data.");
+                    localStorage.removeItem("token");
+                    setIsLoggedIn(false);
+                    navigate('/');
+
+                }
+                throw new Error("Failed to fetch user data.");
             }
+            
+
+
+        
+
+        //   if (!response.ok) {
+        //     if (response.status === 401) {
+        //       // Token is invalid, trigger logout
+        //       logout();
+        //     }
+        //     throw new Error("Failed to fetch user data.");
+        //   }
+        
+
+
   };
 
   // Function to check if the user is already logged in

@@ -10,6 +10,7 @@ import SubAdminLogin from "./pages/subAdmin/SubAdminLogin";
 // import from admin
 import Home from "./pages/admin/Dashboard/Home";
 import Profile from "./pages/admin/Dashboard/Profile";
+import Admins from "./pages/admin/Dashboard/Admins";
 import Users from "./pages/admin/Dashboard/Users";
 import Articles from "./pages/admin/Dashboard/Articles";
 import Events from "./pages/admin/Dashboard/Events";
@@ -45,7 +46,8 @@ const router = createBrowserRouter([
     children:[
       { path: "/dashboard"           ,element: <Home/>},
       { path:"/dashboard/profile"    ,element: <Profile/>},
-      { path:"/dashboard/users"      ,element: <Users/>},
+      { path:"/dashboard/admins"      ,element: <Admins/>},
+      { path:"/dashboard/members"      ,element: <Users/>},
       { path:"/dashboard/articles"   ,element: <Articles/>},
       { path:"/dashboard/events"     ,element: <Events/>},
       { path:"/dashboard/settings"   ,element: <Settings/>},
