@@ -36,6 +36,39 @@ const createsubAdmin = async (newAdmin) => {
 
     return response.json();
 };
+// Delete admin function
+const deleteSubAdmin = async (subadminId) => {
+    const response = await fetch(`http://localhost:8000/api/users/subadmins/${subadminId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error('Failed to delete admin');
+    }
+  
+    return response.json();
+};
+
+// Change admin status function
+const changeSubAdminStatus = async ({subadminId,status}) => {
+    const response = await fetch(`http://localhost:8000/api/users/subadmins/${subadminId}/${status}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error('Failed to change sub admin status');
+    }
+  
+    return response.json();
+  };
 
 // The useAdmin hook
 export const useSubAdmin = () => {
@@ -56,6 +89,22 @@ export const useSubAdmin = () => {
         },
     });
 
+      // Delete admin using useMutation
+  const { mutateAsync: removeSubAdmin, isLoading: isDeleting } = useMutation({
+    mutationFn: deleteSubAdmin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['subadmins'] });
+    },
+  });
+
+    // Change admin status using useMutation
+    const { mutateAsync: updateSubAdminStatus, isLoading: isUpdatingStatus } = useMutation({
+        mutationFn: changeSubAdminStatus,
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['subadmins'] });
+        },
+      });
+
     // Return the list of admins, error, loading states, and mutation function for creating an admin
-    return {subadmins,error,isLoading,isCreating,addsubAdmin};
+    return {subadmins,error,isLoading,isCreating,addsubAdmin,removeSubAdmin,isDeleting,updateSubAdminStatus,isUpdatingStatus};
 };

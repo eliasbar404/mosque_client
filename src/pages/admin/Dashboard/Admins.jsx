@@ -5,8 +5,12 @@ import { Dialog,DialogContent,DialogHeader,DialogTitle,DialogTrigger } from "@/c
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 
+import { Power,PowerOff ,Trash2} from 'lucide-react'
+
 
 const Admins = () => {
+    const active = "active";
+    const unactive = "unactive";
   // eslint-disable-next-line no-unused-vars
   const {register,handleSubmit,formState: { errors },} = useForm();
   
@@ -15,7 +19,7 @@ const Admins = () => {
   // eslint-disable-next-line no-unused-vars
   const [usersPerPage, setUsersPerPage] = useState(10); // You can change the default value
   // eslint-disable-next-line no-unused-vars
-  const {subadmins,error,isLoading,isCreating,addsubAdmin,} = useSubAdmin();
+  const {subadmins,error,isLoading,isCreating,addsubAdmin,removeSubAdmin,updateSubAdminStatus} = useSubAdmin();
   const onSubmit = (data) => addsubAdmin(data);
   if(!isLoading){
     
@@ -104,20 +108,21 @@ const Admins = () => {
                                         </div>
                                     </td>
                                     <td className="p-4 text-sm text-black">
-                                        {val.name}
+                                        {val.phone_number}
                                     </td>
                                     <td className="p-4">
                                         <label className="relative cursor-pointer">
-                                            <input type="checkbox" className="sr-only peer" defaultChecked={val.status === "active"} />
+                                            <input type="checkbox" className="sr-only peer" checked={val.status === "active"} />
                                             <div className="w-11 h-6 flex items-center bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:absolute after:left-[2px] peer-checked:after:border-white after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#007bff]"></div>
                                         </label>
                                     </td>
+                                    
                                     <td className="p-4">
-                                        <button title="Delete">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" />
-                                                <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" />
-                                            </svg>
+                                        {
+                                            val.status == "unactive"? <button title="active" onClick={()=>updateSubAdminStatus({subadminId:val.id,status:active})}><Power color="green" /></button>:<button title="unactive" onClick={()=>updateSubAdminStatus({subadminId:val.id,status:unactive})}><PowerOff color="blue"/></button>
+                                        }
+                                        <button title="Delete" onClick={()=>removeSubAdmin(val.id)}>
+                                            <Trash2 color="red"/>
                                         </button>
                                     </td>
                                 </tr>

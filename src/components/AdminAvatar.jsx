@@ -3,6 +3,20 @@ import {DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuLabel,Drop
 import {Avatar,AvatarFallback,AvatarImage,} from "@/components/ui/avatar"
 import { useMe } from "../hooks/useMe"
 import { useAdminLogin } from "../hooks/useAdminLogin"
+import { Link } from "react-router-dom"
+
+import { House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,UserCog} from "lucide-react";
+
+const data = [
+    {icon:<House/>,        title:"Home",      link:"/dashboard"},
+    {icon:<UserRoundPen />,title:"Profile",   link:"/dashboard/profile"},
+    {icon:<UserCog />,     title:"Admins",    link:"/dashboard/admins"},
+    {icon:<Users />,       title:"Members",   link:"/dashboard/members"},
+    {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
+    {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
+    {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
+    // {icon:<LogOut/>,       title:"Logout",},
+];
 
 const AdminAvatar = () => {
     // eslint-disable-next-line no-unused-vars
@@ -23,6 +37,16 @@ const AdminAvatar = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                {
+                    data.map((val,index)=>(
+                    <DropdownMenuItem key={index} className="cursor-pointer">
+                        <Link to={val.link} className="flex gap-3">
+                            <span>{val.icon}</span>
+                            <span className="font-mono font-black">{val.title}</span>
+                        </Link>
+                    </DropdownMenuItem>
+                    ))
+                }
                 <DropdownMenuItem className="cursor-pointer" onClick={()=>logout()} >
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Log out</span>

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { useMe } from "./useMe";
+
+import axios from "axios";
 
 export const useAdminLogin = () => {
+    const {user} = useMe('admin')
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -85,5 +89,49 @@ export const useAdminLogin = () => {
     }
   };
 
-  return { login, logout, checkAuth, isLoggedIn, loading, error };
+    // Update profile function
+    const updateProfile = async (updatedProfile) => {
+      const token = localStorage.getItem("token");
+      setLoading(true);
+      setError(null);
+
+      
+  
+      try {
+        const response = await fetch(`http://localhost:8000/api/admin/auth/update_profile/${user.id}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": ["application/json","multipart/form-data"],
+            // 'Content-Type': 'multipart/form-data'
+          },
+          body: JSON.stringify(updatedProfile),
+        });
+
+      //   const response = await axios.post(`http://localhost:8000/api/admin/auth/update_profile/${user.id}`, updatedProfile, {
+      //     headers: {
+      //         Authorization: `Bearer ${token}`,
+      //         // No need to set Content-Type; Axios will set it automatically for FormData
+      //     }
+      // });
+  
+        if (!response.ok) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Failed to update profile!",
+          });
+          return;
+        }
+  
+        Swal.fire("Profile updated successfully!");
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+
+  return { login, logout, checkAuth, isLoggedIn, loading, error ,updateProfile};
 };

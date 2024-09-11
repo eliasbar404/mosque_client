@@ -1,34 +1,34 @@
-import { Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger } from "@/components/ui/sheet"
 // import icons
-import { useAdminLogin } from "../../../hooks/useAdminLogin";
-import { LayoutDashboard,House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut,UserCog} from "lucide-react";
+
+import { House } from "lucide-react";
 import { Link} from "react-router-dom";
 import AdminAvatar from "../../../components/AdminAvatar";
-const data = [
-    {icon:<House/>,        title:"Home",      link:"/dashboard"},
-    {icon:<UserRoundPen />,title:"Profile",   link:"/dashboard/profile"},
-    {icon:<UserCog />,     title:"Admins",    link:"/dashboard/admins"},
-    {icon:<Users />,       title:"Members",   link:"/dashboard/members"},
-    {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
-    {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
-    {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
-    // {icon:<LogOut/>,       title:"Logout",},
-];
+// const data = [
+//     {icon:<House/>,        title:"Home",      link:"/dashboard"},
+//     {icon:<UserRoundPen />,title:"Profile",   link:"/dashboard/profile"},
+//     {icon:<UserCog />,     title:"Admins",    link:"/dashboard/admins"},
+//     {icon:<Users />,       title:"Members",   link:"/dashboard/members"},
+//     {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
+//     {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
+//     {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
+//     {icon:<LogOut/>,       title:"Logout",},
+// ];
 
 
 const Sidebar = () => {
-    const {logout} = useAdminLogin();
     
     return (
-        <Sheet>
-            <div className="shadow-lg py-1 px-2 bg-white fixed w-full flex justify-between">
-                <SheetTrigger><LayoutDashboard size={32} className="font-black"/></SheetTrigger>
-                <div>
-                    <AdminAvatar/>
-                </div>
-            </div>
+        <div className="shadow-lg py-1 px-10 bg-white fixed w-full flex justify-between">
+            <Link to={'/dashboard'}><House size={32} className="font-black"/></Link>
+            <div><AdminAvatar/></div>
+        </div>
             
-            <SheetContent side="left" className="w-[300px]">
+)
+}
+
+export default Sidebar
+
+            {/* <SheetContent side="left" className="w-[300px]">
                 <SheetHeader className="flex mt-10 gap-3">
                     {
                         data.map((val,index)=>(
@@ -42,26 +42,18 @@ const Sidebar = () => {
                     </Link>
                     
                 </SheetHeader>
-            </SheetContent>
+            </SheetContent> */}
 
-        </Sheet>
-)
-}
-
-export default Sidebar
-
-
-
-export const CustomLink = (props)=>{
-    // const {logout} = useAdminLogin();
-    return (
+// export const CustomLink = (props)=>{
+//     // const {logout} = useAdminLogin();
+//     return (
         
-        // eslint-disable-next-line react/prop-types
-        <Link to={props.data.link} className="flex gap-2 p-2 rounded-md cursor-pointer hover:bg-slate-100 hover:text-blue-900" >
-            {/* eslint-disable-next-line react/prop-types */}
-            <span>{props.data.icon}</span>
-            {/* eslint-disable-next-line react/prop-types */}
-            <span className="font-mono font-black">{props.data.title}</span>
-        </Link>
-    )
-}
+//         // eslint-disable-next-line react/prop-types
+//         <Link to={props.data.link} className="flex gap-2 p-2 rounded-md cursor-pointer hover:bg-slate-100 hover:text-blue-900" >
+//             {/* eslint-disable-next-line react/prop-types */}
+//             <span>{props.data.icon}</span>
+//             {/* eslint-disable-next-line react/prop-types */}
+//             <span className="font-mono font-black">{props.data.title}</span>
+//         </Link>
+//     )
+// }
