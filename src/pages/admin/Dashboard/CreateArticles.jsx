@@ -1,5 +1,6 @@
 // import React from 'react'
 // import { useEditor, EditorContent } from '@tiptap/react'
+import Swal from 'sweetalert2';
 import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
             // Import all Froala Editor plugins;
@@ -30,52 +31,109 @@ import 'froala-editor/css/froala_editor.pkgd.min.css';
 
 import FroalaEditorComponent from 'react-froala-wysiwyg';
 import { Input } from "@/components/ui/input"
-import { useState } from "react";
-import {CloudUpload ,Trash2,ArrowBigLeft} from 'lucide-react'
+import { useState ,useRef} from "react";
+import {CloudUpload ,ArrowBigLeft} from 'lucide-react'
 import {Link} from 'react-router-dom'
 
 const CreateArticles = () => {
   // const editor = useEditor()
-  const [files, setFiles] = useState([]);
-  function handleChange(e) {
-      console.log(e.target.files);
-      setFiles([...files,URL.createObjectURL(e.target.files[0])]);
+  const [title,setTitle] = useState("");
+  const [slug,setSlug]   = useState("");
+  const [description,Setdescription] = useState("");
+  const fileUploadRef = useRef(null);
+  const [image, setImage] = useState(null);
+
+  const [imageUrl ,setImageUrl] = useState("")
+  // function handleChange(e) {
+  //     setImage(e.target.files[0]);
+      
+  // }
+  const uploadImageDisplay = async (e) => {
+    const uploadedFile = fileUploadRef.current.files[0];
+    setImageUrl(URL.createObjectURL(e.target.files[0]));
+    setImage(uploadedFile);
+}
+
+  const onSubmit = async(e)=>{
+    e.preventDefault()
+    const token = localStorage.getItem("token");
+    
+    // Create a FormData object
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('slug', slug);
+    formData.append('image', image);
+    formData.append('description', description);
+
+    try {
+      const response = await fetch(`http://localhost:8000/api/articles`, {
+          method: "POST",
+          headers: {
+              Authorization: `Bearer ${token}`,  // Authorization header
+              // Do not manually set Content-Type, let fetch handle it
+          },
+          body: formData,  // Use formData as the request body
+      });
+
+      if (!response.ok) {
+          Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Failed to update profile!",
+          });
+          return;
+      }
+
+      Swal.fire("Create Article successfully!");
+      setTitle("")
+      setImageUrl("")
+      setSlug("")
+      Setdescription("")
+      
+  } catch (err) {
+      console.log(err);
+  }
+
+
+
+
+
+    console.log(description)
   }
   return (
     <div>
         <Link to="/dashboard/articles" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Back</span></Link>
       
         <h2 className="text-center text-xl font-mono font-black p-4">Create new article Page</h2>
-        <form className="m-10 flex flex-col gap-3">
+        <form className="m-10 flex flex-col gap-3" onSubmit={onSubmit}>
             {/* title */}
             <label htmlFor="title" className="flex flex-col justify-start gap-2">
               <span className="text-lg font-black font-mono">Title</span>
-              <Input type="text" id="title" name="title" placeholder="Title" />
+              <Input type="text" value={title} onChange={(e)=>setTitle(e.target.value)} id="title" name="title" placeholder="Title" />
             </label>
             {/* slug */}
             <label htmlFor="slug" className="flex flex-col justify-start gap-2">
               <span className="text-lg font-black font-mono">Slug</span>
-              <Input type="text" id="slug" name="slug" placeholder="Slug" />
+              <Input type="text" value={slug} onChange={(e)=>setSlug(e.target.value)} id="slug" name="slug" placeholder="Slug" />
             </label>
             {/* Image */}
             <label htmlFor="image" className="flex gap-2 bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
                 <CloudUpload />
                 <span className="font-mono">Upload Images</span>
-                <input type="file" id='image' className="hidden" onChange={handleChange}/>
+                <input type="file" ref={fileUploadRef} id='image' className="hidden" onChange={uploadImageDisplay}/>
             </label>
             {/* Display Image */}
-            {files.length > 0 && <div className="grid grid-cols-4 border-solid border-2 border-black p-1">
-              {files.map((val,index)=>(
-                <div key={index} className="relative">
-                  <img  src={files[index]} className="w-[300px] h-[200px] mx-auto mt-5"/>
-                  <Trash2 size={40} color={"white"} className="absolute top-[25px] left-[260px] bg-red-600 p-1 rounded-full cursor-pointer"/>
-                </div>
-              ))}
-            </div> }
+
+              {
+                imageUrl && <img  src={imageUrl} className="w-[600px] h-[300px] mx-auto mt-5"/>
+              }
+
+
+            {/* </div>  */}
 
             {/* Description */}
             <label htmlFor="description" className="text-lg font-black font-mono">Description</label>
-            <FroalaEditorComponent tag='textarea' value="kdkdkkd" id="description"/>
+            <FroalaEditorComponent tag='textarea'  id="description" model={description} onModelChange={Setdescription} />
 
 
             <button type="submit" className="bg-green-500 self-center text-xl font-mono font-black px-10 py-2 text-slate-50 mt-5 hover:bg-green-800">Submit</button>

@@ -16,6 +16,7 @@ import Articles from "./pages/admin/Dashboard/Articles";
 import Events from "./pages/admin/Dashboard/Events";
 import Settings from "./pages/admin/Dashboard/Settings";
 import CreateArticles from "./pages/admin/Dashboard/CreateArticles";
+import UpdateArticles from "./pages/admin/Dashboard/UpdateArticles";
 
 // import from subadmin
 import SubHome from "./pages/subAdmin/Dashboard/Home";
@@ -52,7 +53,9 @@ const router = createBrowserRouter([
       { path:"/dashboard/events"     ,element: <Events/>},
       { path:"/dashboard/settings"   ,element: <Settings/>},
 
-      { path:"/dashboard/articles/create"   ,element: <CreateArticles/>}
+      { path:"/dashboard/articles/create"   ,element: <CreateArticles/>},
+      { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
+      
 
     ]
   },
