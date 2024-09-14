@@ -17,6 +17,8 @@ import Events from "./pages/admin/Dashboard/Events";
 import Settings from "./pages/admin/Dashboard/Settings";
 import CreateArticles from "./pages/admin/Dashboard/CreateArticles";
 import UpdateArticles from "./pages/admin/Dashboard/UpdateArticles";
+import CreateEvents from "./pages/admin/Dashboard/CreateEvents";
+import UpdateEvents from "./pages/admin/Dashboard/UpdateEvents";
 
 // import from subadmin
 import SubHome from "./pages/subAdmin/Dashboard/Home";
@@ -52,9 +54,12 @@ const router = createBrowserRouter([
       { path:"/dashboard/articles"   ,element: <Articles/>},
       { path:"/dashboard/events"     ,element: <Events/>},
       { path:"/dashboard/settings"   ,element: <Settings/>},
+      
 
       { path:"/dashboard/articles/create"   ,element: <CreateArticles/>},
+      { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
       { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
+      { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
       
 
     ]
