@@ -3,30 +3,7 @@ import { useState } from 'react';
 import { useMembers } from '../../../hooks/useMembers';
 import { Power,PowerOff ,Trash2} from 'lucide-react'
 
-const users = [
-    {firstName: "John",lastName: "Doe",email: "john.doe@example.com",phoneNumber: "+1234567890",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg"},
-    {firstName: "Jane",lastName: "Smith",email: "jane.smith@example.com",phoneNumber: "+0987654321",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/1.jpg"},
-    {firstName: "Michael",lastName: "Johnson",email: "michael.johnson@example.com",phoneNumber: "+1122334455",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/2.jpg"},
-    {firstName: "Emily", lastName: "Brown",email: "emily.brown@example.com",phoneNumber: "+9988776655",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg"},
-    {firstName: "John",lastName: "Doe",email: "john.doe@example.com",phoneNumber: "+1234567890",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg"},
-    {firstName: "Jane",lastName: "Smith",email: "jane.smith@example.com",phoneNumber: "+0987654321",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/1.jpg"},
-    {firstName: "Michael",lastName: "Johnson",email: "michael.johnson@example.com",phoneNumber: "+1122334455",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/2.jpg"},
-    {firstName: "Emily",lastName: "Brown",email: "emily.brown@example.com",phoneNumber: "+9988776655",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg"},
-    {firstName: "John",lastName: "Doe",email: "john.doe@example.com",phoneNumber: "+1234567890",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg"},
-    {firstName: "Jane",lastName: "Smith",email: "jane.smith@example.com",phoneNumber: "+0987654321",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/1.jpg"},
-    {firstName: "Michael",lastName: "Johnson",email: "michael.johnson@example.com",phoneNumber: "+1122334455",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/2.jpg"},
-    {firstName: "Emily",lastName: "Brown",email: "emily.brown@example.com",phoneNumber: "+9988776655",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg"},
-    {firstName: "John",lastName: "Doe",email: "john.doe@example.com",phoneNumber: "+1234567890",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg"},
-    {firstName: "Jane",lastName: "Smith",email: "jane.smith@example.com",phoneNumber: "+0987654321",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/1.jpg"},
-    {firstName: "Michael",lastName: "Johnson",email: "michael.johnson@example.com",phoneNumber: "+1122334455",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/2.jpg"},
-    {firstName: "Emily",lastName: "Brown",email: "emily.brown@example.com",phoneNumber: "+9988776655",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg"},
-    {firstName: "John",lastName: "Doe",email: "john.doe@example.com",phoneNumber: "+1234567890",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg"},
-    {firstName: "Jane",lastName: "Smith",email: "jane.smith@example.com",phoneNumber: "+0987654321",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/1.jpg"},
-    {firstName: "Michael",lastName: "Johnson",email: "michael.johnson@example.com",phoneNumber: "+1122334455",status: "active",profileImageUrl: "https://randomuser.me/api/portraits/men/2.jpg"},
-    {firstName: "Emily",lastName: "Brown",email: "emily.brown@example.com",phoneNumber: "+9988776655",status: "notactive",profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg"
-    }
-  // Add more users if needed
-];
+
 
 const Users = () => {
     const active = "active";

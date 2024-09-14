@@ -2,13 +2,7 @@ import { useState } from 'react';
 import { Link } from "react-router-dom"
 import {FilePlus ,BookPlus ,FilePenLine,Trash2} from "lucide-react"
 import { useArticles } from '../../../hooks/useArticles';
-// const articles = [
-//     {title: "Introduction to JavaScript",imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTewFJxkgofm7SIekFKMBs0vJIWqwJjno3K5g&s",views: 1250,publishedAt: null,status: "published"},
-//     {title: "Understanding Asynchronous JavaScript",imageUrl: "https://images.unsplash.com/photo-1619687248404-7f38c79e5d8b",views: 890,publishedAt: "2024-08-25T14:00:00Z",status: "published"},
-//     {title: "The Basics of React",imageUrl: "https://images.unsplash.com/photo-1552564705-b7d4e747e451",views: 560,publishedAt: "2024-08-20T09:30:00Z",status: "published"},
-//     {title: "How to Use Promises in JavaScript",imageUrl: "https://images.unsplash.com/photo-1581091012188-2e06c78d4622",views: 320,publishedAt: "2024-08-15T11:45:00Z",status: "draft"},
-//     {title: "Understanding Closures",imageUrl: "https://images.unsplash.com/photo-1552564705-b7d4e747e451",views: 410,publishedAt: "2024-08-10T08:00:00Z",status: "published"}
-// ];
+
 
 const Articles = () => {
     const {articles,isLoading,publisharticle,removeArticle} = useArticles();

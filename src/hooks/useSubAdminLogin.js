@@ -24,8 +24,6 @@ export const useSubAdminLogin = () => {
       });
 
       if (!response.ok) {
-        // throw new Error("Login failed, please check your credentials.");
-        // Swal.fire("Login failed, please check your credentials!");
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -53,46 +51,30 @@ export const useSubAdminLogin = () => {
     navigate('/subadmin/dashboard');
   };
 
-  // Function to logout and clear the JWT
-  const logout = async() => {
+// Function to logout and clear the JWT
+const logout = async() => {
   
-            const token =  localStorage.getItem("token");
-            const response = await fetch(`http://localhost:8000/api/subadmin/auth/logout`, {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              });
+      const token =  localStorage.getItem("token");
+      const response = await fetch(`http://localhost:8000/api/subadmin/auth/logout`, {
+          method: "POST",
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+        });
 
-              if (response) {
-                if (response.status === 200) {
-                  // Token is invalid, trigger logout
-                    localStorage.removeItem("token");
-                    setIsLoggedIn(false);
-                    navigate('/');
+        if (response) {
+            if (response.status === 200) {
+                // Token is invalid, trigger logout
+                localStorage.removeItem("token");
+                setIsLoggedIn(false);
+                navigate('/');
+              }
+              throw new Error("Failed to fetch user data.");
+        }
+};
 
-                }
-                throw new Error("Failed to fetch user data.");
-            }
-            
-
-
-        
-
-        //   if (!response.ok) {
-        //     if (response.status === 401) {
-        //       // Token is invalid, trigger logout
-        //       logout();
-        //     }
-        //     throw new Error("Failed to fetch user data.");
-        //   }
-        
-
-
-  };
-
-  // Function to check if the user is already logged in
-  const checkAuth = () => {
+// Function to check if the user is already logged in
+const checkAuth = () => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);

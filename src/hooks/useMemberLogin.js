@@ -75,17 +75,6 @@ export const useAdminLogin = () => {
                 throw new Error("Failed to fetch user data.");
             }
             
-
-
-        
-
-        //   if (!response.ok) {
-        //     if (response.status === 401) {
-        //       // Token is invalid, trigger logout
-        //       logout();
-        //     }
-        //     throw new Error("Failed to fetch user data.");
-        //   }
         
 
 

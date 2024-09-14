@@ -11,69 +11,55 @@ import { Power,PowerOff ,Trash2} from 'lucide-react'
 const Admins = () => {
     const active = "active";
     const unactive = "unactive";
-  // eslint-disable-next-line no-unused-vars
-  const {register,handleSubmit,formState: { errors },} = useForm();
-  
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
-  const [usersPerPage, setUsersPerPage] = useState(10); // You can change the default value
-  // eslint-disable-next-line no-unused-vars
-  const {subadmins,error,isLoading,isCreating,addsubAdmin,removeSubAdmin,updateSubAdminStatus} = useSubAdmin();
-  const onSubmit = (data) => addsubAdmin(data);
-  if(!isLoading){
-    
-      // Filter users based on the search query
-  const filteredUsers = subadmins.filter(user =>
+    // eslint-disable-next-line no-unused-vars
+    const {register,handleSubmit,formState: { errors },} = useForm();
+    const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    // eslint-disable-next-line no-unused-vars
+    const [usersPerPage, setUsersPerPage] = useState(10); // You can change the default value
+    // eslint-disable-next-line no-unused-vars
+    const {subadmins,error,isLoading,isCreating,addsubAdmin,removeSubAdmin,updateSubAdminStatus} = useSubAdmin();
+    const onSubmit = (data) => addsubAdmin(data);
+    if(!isLoading){
+        // Filter users based on the search query
+        const filteredUsers = subadmins.filter(user =>
         `${user.name}`.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  // Calculate the users to display based on pagination
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+        );
 
-  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+        // Calculate the users to display based on pagination
+        const indexOfLastUser = currentPage * usersPerPage;
+        const indexOfFirstUser = indexOfLastUser - usersPerPage;
+        const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
-  // Handle page change
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+        const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+
+        // Handle page change
+        const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
-  
+if (isLoading) return <p>Loading admins...</p>;
+if (error) return <p>Error loading admins: {error.message}</p>;
 
-  // const [newAdmin, setNewAdmin] = useState({ name: '', email: '' ,password:'',password_confirmation:''});
-
-  // const handleAddAdmin = async () => {
-  //   try {
-  //     await addsubAdmin(newAdmin);
-  //     setNewAdmin({ name: '', email: '' ,password:'',password_confirmation:''});
-  //   } catch (error) {
-  //     console.error('Error creating admin:', error);
-  //   }
-  // };
-
-  if (isLoading) return <p>Loading admins...</p>;
-  if (error) return <p>Error loading admins: {error.message}</p>;
-
-  return (
+return (
     <div className="mx-5">
-      <h3 className="font-mono font-black text-center mt-5 text-xl">SUB Admins List</h3>
-      <Dialog>
-          <DialogTrigger asChild>
-              <Button variant="outline" className="bg-green-400 text-slate-50 hover:bg-green-600 hover:text-slate-50">Add New</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader><DialogTitle className="text-center">Create New SUB Admin</DialogTitle></DialogHeader>
-              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 py-4">
-                  <Input id="name"           placeholder="Name"                  className="" {...register("name", { required: true })}/>
-                  <Input id="email"          placeholder="Email"                 className="" {...register("email", { required: true })}/>
-                  <Input id="phone_number"   placeholder="Phone Number"          className="" {...register("phone_number", { required: true })}/>
-                  <Input id="password"       placeholder="Password"              className="" {...register("password", { required: true })}/>
-                  <Input id="password_conf"  placeholder="Password Confirmation" className="" {...register("password_confirmation", { required: true })}/>
-                  <Button type="submit" className="bg-blue-500 hover:bg-blue-700">Save</Button>
-              </form>
-          </DialogContent>
-      </Dialog>
-      <div className="mt-4 mb-6">
+        <h3 className="font-mono font-black text-center mt-5 text-xl">SUB Admins List</h3>
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button variant="outline" className="bg-green-400 text-slate-50 hover:bg-green-600 hover:text-slate-50">Add New</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader><DialogTitle className="text-center">Create New SUB Admin</DialogTitle></DialogHeader>
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 py-4">
+                    <Input id="name"           placeholder="Name"                  className="" {...register("name", { required: true })}/>
+                    <Input id="email"          placeholder="Email"                 className="" {...register("email", { required: true })}/>
+                    <Input id="phone_number"   placeholder="Phone Number"          className="" {...register("phone_number", { required: true })}/>
+                    <Input id="password"       placeholder="Password"              className="" {...register("password", { required: true })}/>
+                    <Input id="password_conf"  placeholder="Password Confirmation" className="" {...register("password_confirmation", { required: true })}/>
+                    <Button type="submit" className="bg-blue-500 hover:bg-blue-700">Save</Button>
+                </form>
+            </DialogContent>
+        </Dialog>
+        <div className="mt-4 mb-6">
                 <input
                     type="text"
                     placeholder="Search by name..."
@@ -157,8 +143,8 @@ const Admins = () => {
                 </div>
             </div>
     </div>
-  );
-  }
+);
+}
 }
 
 export default Admins

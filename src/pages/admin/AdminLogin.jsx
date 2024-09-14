@@ -4,7 +4,8 @@ import { useAdminLogin } from "../../hooks/useAdminLogin";
 import ErrorAlert from "../../components/ErrorAlert";
 
 const AdminLogin = () => {
-  const { login, logout, checkAuth, isLoggedIn, loading, error } = useAdminLogin();
+  // eslint-disable-next-line no-unused-vars
+  const { login, checkAuth, isLoggedIn, loading, error } = useAdminLogin();
   const {register,handleSubmit,formState: { errors },} = useForm();
 
   const onSubmit = (data) => login(data.email,data.password);
@@ -16,9 +17,7 @@ const AdminLogin = () => {
 <div className="bg-gray-50 font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
-          {/* <a href="javascript:void(0)"><img
-            src="https://readymadeui.com/readymadeui.svg" alt="logo" className='w-40 mb-8 mx-auto block' />
-          </a> */}
+
 
           {errors.password && <ErrorAlert/>}
           {errors.email && <ErrorAlert/>}

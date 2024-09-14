@@ -45,15 +45,12 @@ const UpdateArticles = () => {
         const [image, setImage] = useState(null);
 
         const [imageUrl ,setImageUrl] = useState("")
-        // function handleChange(e) {
-        //     setImage(e.target.files[0]);
-            
-        // }
+
         const uploadImageDisplay = async (e) => {
-          const uploadedFile = fileUploadRef.current.files[0];
-          setImageUrl(URL.createObjectURL(e.target.files[0]));
-          setImage(uploadedFile);
-      }
+            const uploadedFile = fileUploadRef.current.files[0];
+            setImageUrl(URL.createObjectURL(e.target.files[0]));
+            setImage(uploadedFile);
+        }
     
     const OnUpdate = async(e)=>{
         e.preventDefault()
@@ -89,31 +86,7 @@ const UpdateArticles = () => {
                 });
                 console.log(err);
             }
-            // try {
-            //     const response = await fetch(`http://localhost:8000/api/articles/${Article_id}/update`, {
-            //         method: "POST",
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,  // Authorization header
-            //             // Do not manually set Content-Type, let fetch handle it
-            //         },
-            //         body: JSON.stringify(data),  // Use formData as the request body
-            //     });
-          
-            //     if (!response.ok) {
-            //         Swal.fire({
-            //             icon: "error",
-            //             title: "Oops...",
-            //             text: "Failed to update Article!",
-            //         });
-            //         return;
-            //     }
-          
-            //     Swal.fire("Update Article successfully!");
 
-                
-            // } catch (err) {
-            //     console.log(err);
-            // }
 
     }
 
@@ -162,18 +135,18 @@ const UpdateArticles = () => {
             {article &&     <div>
                 
 
-      
+    
         <h2 className="text-center text-xl font-mono font-black p-4">Update Article {article.id}</h2>
         <form className="m-10 flex flex-col gap-3" onSubmit={OnUpdate}>
             {/* title */}
             <label htmlFor="title" className="flex flex-col justify-start gap-2">
-              <span className="text-lg font-black font-mono">Title</span>
-              <Input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}  id="title" name="title" placeholder="Title" />
+                <span className="text-lg font-black font-mono">Title</span>
+                <Input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}  id="title" name="title" placeholder="Title" />
             </label>
             {/* slug */}
             <label htmlFor="slug" className="flex flex-col justify-start gap-2">
-              <span className="text-lg font-black font-mono">Slug</span>
-              <Input type="text" value={slug} onChange={(e)=>setSlug(e.target.value)} id="slug" name="slug" placeholder="Slug" />
+                <span className="text-lg font-black font-mono">Slug</span>
+                <Input type="text" value={slug} onChange={(e)=>setSlug(e.target.value)} id="slug" name="slug" placeholder="Slug" />
             </label>
             {/* Image */}
             <label htmlFor="image" className="flex gap-2 bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
@@ -192,20 +165,11 @@ const UpdateArticles = () => {
 
             <button type="submit" className="bg-green-500 self-center text-xl font-mono font-black px-10 py-2 text-slate-50 mt-5 hover:bg-green-800">Update</button>
 
-    
-
-
-
         </form>
 
-        
-
-        
-        
-        
     </div>}
 
-        </div>
+</div>
     );
 };
 

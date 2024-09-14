@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import { useMe } from "./useMe";
 
-import axios from "axios";
+
 
 export const useAdminLogin = () => {
-    const {user} = useMe('admin')
+    const { user } = useMe('admin')
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [loading   , setLoading]    = useState(false);
+    const [error     , setError ]     = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // Perform the login API call
@@ -28,8 +28,7 @@ export const useAdminLogin = () => {
       });
 
       if (!response.ok) {
-        // throw new Error("Login failed, please check your credentials.");
-        // Swal.fire("Login failed, please check your credentials!");
+
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -108,12 +107,6 @@ export const useAdminLogin = () => {
           body: JSON.stringify(updatedProfile),
         });
 
-      //   const response = await axios.post(`http://localhost:8000/api/admin/auth/update_profile/${user.id}`, updatedProfile, {
-      //     headers: {
-      //         Authorization: `Bearer ${token}`,
-      //         // No need to set Content-Type; Axios will set it automatically for FormData
-      //     }
-      // });
   
         if (!response.ok) {
           Swal.fire({

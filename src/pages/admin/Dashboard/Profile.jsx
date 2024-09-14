@@ -11,10 +11,13 @@ const Profile = () => {
 
     // const navigate = useNavigate();
 
+    // eslint-disable-next-line no-unused-vars
     const { user, loading, error } = useMe("admin");
+    // eslint-disable-next-line no-unused-vars
     const { register,handleSubmit,formState: { errors },} = useForm();
     const [ profilePicture,setProfilePicture ] = useState(null);
     const fileUploadRef = useRef(null);
+    // eslint-disable-next-line no-unused-vars
     const { updateProfile,logout } = useAdminLogin();
 
     const [ current_password          , SetCurrent_password          ]  = useState("");

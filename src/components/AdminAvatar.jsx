@@ -1,11 +1,10 @@
-import {LogOut} from "lucide-react"
-import {DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuLabel,DropdownMenuSeparator,DropdownMenuShortcut,DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
-import {Avatar,AvatarFallback,AvatarImage,} from "@/components/ui/avatar"
+import { DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuLabel,DropdownMenuSeparator,DropdownMenuShortcut,DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
+import { Avatar,AvatarFallback,AvatarImage } from "@/components/ui/avatar"
 import { useMe } from "../hooks/useMe"
 import { useAdminLogin } from "../hooks/useAdminLogin"
 import { Link } from "react-router-dom"
 
-import { House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,UserCog} from "lucide-react";
+import { House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,UserCog,LogOut } from "lucide-react";
 
 const data = [
     {icon:<House/>,        title:"Home",      link:"/dashboard"},
@@ -15,7 +14,6 @@ const data = [
     {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
     {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
     {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
-    // {icon:<LogOut/>,       title:"Logout",},
 ];
 
 const AdminAvatar = () => {
@@ -55,8 +53,6 @@ const AdminAvatar = () => {
             </DropdownMenuContent>
         </DropdownMenu>
 )
-
-
 }
 
 export default AdminAvatar
