@@ -1,4 +1,5 @@
 import { createBrowserRouter} from "react-router-dom";
+import Layout from "./pages/Layout";
 
 // Import Pages
 import HomePage from "./pages/Home";
@@ -6,6 +7,10 @@ import Dashboard from "./pages/admin/Dashboard";
 import SubDashboard from "./pages/subAdmin/Dashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import SubAdminLogin from "./pages/subAdmin/SubAdminLogin";
+import ArticlesPage from "./pages/ArticlesPage";
+import EventsPage from "./pages/EventsPage";
+import DonsPage from "./pages/DonsPage";
+import ContactPage from "./pages/ContactPage";
 
 // import from admin
 import Home from "./pages/admin/Dashboard/Home";
@@ -20,6 +25,7 @@ import UpdateArticles from "./pages/admin/Dashboard/UpdateArticles";
 import CreateEvents from "./pages/admin/Dashboard/CreateEvents";
 import UpdateEvents from "./pages/admin/Dashboard/UpdateEvents";
 
+
 // import from subadmin
 import SubHome from "./pages/subAdmin/Dashboard/Home";
 import SubProfile from "./pages/subAdmin/Dashboard/Profile";
@@ -30,55 +36,53 @@ import SubSettings from "./pages/subAdmin/Dashboard/Settings";
 import SubCreateArticles from "./pages/subAdmin/Dashboard/CreateArticles";
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage/>,
-  },
-  {
-    path: "/admin",
-    element: <AdminLogin/>,
-  },
-  {
-    path: "/subadmin",
-    element: <SubAdminLogin/>,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard/>,
-    children:[
-      { path: "/dashboard"           ,element: <Home/>},
-      { path:"/dashboard/profile"    ,element: <Profile/>},
-      { path:"/dashboard/admins"      ,element: <Admins/>},
-      { path:"/dashboard/members"      ,element: <Users/>},
-      { path:"/dashboard/articles"   ,element: <Articles/>},
-      { path:"/dashboard/events"     ,element: <Events/>},
-      { path:"/dashboard/settings"   ,element: <Settings/>},
-      
+    element: <Layout />, // Use the Layout component
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "/Articles", element:<ArticlesPage /> },
+      { path: "/Events", element:<EventsPage /> },
+      { path: "/Dons", element: <DonsPage /> },
+      { path: "/Contact", element:<ContactPage /> },
 
-      { path:"/dashboard/articles/create"   ,element: <CreateArticles/>},
-      { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
-      { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
-      { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
-      
+      { path: "admin", element: <AdminLogin /> },
+      { path: "subadmin", element: <SubAdminLogin />},
 
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: "profile", element: <Profile /> },
+          { path: "admins", element: <Admins /> },
+          { path: "members", element: <Users /> },
+          { path: "articles", element: <Articles /> },
+          { path: "events", element: <Events /> },
+          { path: "settings", element: <Settings /> },
+          { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
+          { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
+          { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
+        ]
+      },
+
+      {
+        path: "subadmin/dashboard",
+        element: <SubDashboard />,
+        children: [
+          { index: true, element: <SubHome /> },
+          { path: "profile", element: <SubProfile /> },
+          { path: "users", element: <SubUsers /> },
+          { path: "articles", element: <SubArticles /> },
+          { path: "events", element: <SubEvents /> },
+          { path: "settings", element: <SubSettings /> },
+          { path: "articles/create", element: <SubCreateArticles /> },
+        ]
+      }
     ]
-  },
-  {
-    path: "/subadmin/dashboard",
-    element: <SubDashboard/>,
-    children:[
-      { path: "/subadmin/dashboard"           ,element: <SubHome/>},
-      { path:"/subadmin/dashboard/profile"    ,element: <SubProfile/>},
-      { path:"/subadmin/dashboard/users"      ,element: <SubUsers/>},
-      { path:"/subadmin/dashboard/articles"   ,element: <SubArticles/>},
-      { path:"/subadmin/dashboard/events"     ,element: <SubEvents/>},
-      { path:"/subadmin/dashboard/settings"   ,element: <SubSettings/>},
-
-      { path:"/subadmin/dashboard/articles/create"   ,element: <SubCreateArticles/>}
-
-    ]
-  },
+  }
 ]);
 
 export default router;
