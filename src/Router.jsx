@@ -34,6 +34,9 @@ import SubArticles from "./pages/subAdmin/Dashboard/Articles";
 import SubEvents from "./pages/subAdmin/Dashboard/Events";
 import SubSettings from "./pages/subAdmin/Dashboard/Settings";
 import SubCreateArticles from "./pages/subAdmin/Dashboard/CreateArticles";
+import SubUpdateArticles from "./pages/subadmin/Dashboard/UpdateArticles";
+import SubCreateEvents from "./pages/subadmin/Dashboard/CreateEvents";
+import SubUpdateEvents from "./pages/subadmin/Dashboard/UpdateEvents";
 
 
 
@@ -48,39 +51,45 @@ const router = createBrowserRouter([
       { path: "/Dons", element: <DonsPage /> },
       { path: "/Contact", element:<ContactPage /> },
 
-      { path: "admin", element: <AdminLogin /> },
-      { path: "subadmin", element: <SubAdminLogin />},
+      
+    ]
+  },
+  { path: "admin", element: <AdminLogin /> },
+  { path: "subadmin", element: <SubAdminLogin />},
 
-      {
-        path: "dashboard",
-        element: <Dashboard />,
-        children: [
-          { index: true, element: <Home /> },
-          { path: "profile", element: <Profile /> },
-          { path: "admins", element: <Admins /> },
-          { path: "members", element: <Users /> },
-          { path: "articles", element: <Articles /> },
-          { path: "events", element: <Events /> },
-          { path: "settings", element: <Settings /> },
-          { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
-          { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
-          { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
-        ]
-      },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "profile", element: <Profile /> },
+      { path: "admins", element: <Admins /> },
+      { path: "members", element: <Users /> },
+      { path: "articles", element: <Articles /> },
+      { path: "events", element: <Events /> },
+      { path: "settings", element: <Settings /> },
+      { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
+      { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
+      { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
+      { path: "articles/create", element: <CreateArticles /> },
+    ]
+  },
 
-      {
-        path: "subadmin/dashboard",
-        element: <SubDashboard />,
-        children: [
-          { index: true, element: <SubHome /> },
-          { path: "profile", element: <SubProfile /> },
-          { path: "users", element: <SubUsers /> },
-          { path: "articles", element: <SubArticles /> },
-          { path: "events", element: <SubEvents /> },
-          { path: "settings", element: <SubSettings /> },
-          { path: "articles/create", element: <SubCreateArticles /> },
-        ]
-      }
+  {
+    path: "subadmin/dashboard",
+    element: <SubDashboard />,
+    children: [
+      { index: true, element: <SubHome /> },
+      { path: "profile", element: <SubProfile /> },
+      { path: "members", element: <SubUsers /> },
+      { path: "articles", element: <SubArticles /> },
+      { path: "events", element: <SubEvents /> },
+      { path: "settings", element: <SubSettings /> },
+      { path: "articles/create", element: <SubCreateArticles /> },
+      { path:"events/create"     ,element: <SubCreateEvents/>},
+      { path:"articles/:ArticleId/update"   ,element: <SubUpdateArticles/>},
+      { path:"events/:EventId/update"   ,element: <SubUpdateEvents/>},
+
     ]
   }
 ]);
