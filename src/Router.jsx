@@ -24,6 +24,8 @@ import CreateArticles from "./pages/admin/Dashboard/CreateArticles";
 import UpdateArticles from "./pages/admin/Dashboard/UpdateArticles";
 import CreateEvents from "./pages/admin/Dashboard/CreateEvents";
 import UpdateEvents from "./pages/admin/Dashboard/UpdateEvents";
+import AdminContact from "./pages/admin/Dashboard/Contact";
+import AdminContactPage from "./pages/admin/Dashboard/ContactPage";
 
 
 // import from subadmin
@@ -37,6 +39,8 @@ import SubCreateArticles from "./pages/subAdmin/Dashboard/CreateArticles";
 import SubUpdateArticles from "./pages/subadmin/Dashboard/UpdateArticles";
 import SubCreateEvents from "./pages/subadmin/Dashboard/CreateEvents";
 import SubUpdateEvents from "./pages/subadmin/Dashboard/UpdateEvents";
+import SubAdminContact from "./pages/subAdmin/Dashboard/Contact";
+import SubAdminContactPage from "./pages/subAdmin/Dashboard/ContactPage";
 
 
 
@@ -72,6 +76,8 @@ const router = createBrowserRouter([
       { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
       { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
       { path: "articles/create", element: <CreateArticles /> },
+      { path: "contacts", element: <AdminContact /> },
+      { path: "contacts/:ContactId", element: <AdminContactPage /> },
     ]
   },
 
@@ -85,10 +91,13 @@ const router = createBrowserRouter([
       { path: "articles", element: <SubArticles /> },
       { path: "events", element: <SubEvents /> },
       { path: "settings", element: <SubSettings /> },
+      { path: "contacts"   ,element: <SubAdminContact/>},
       { path: "articles/create", element: <SubCreateArticles /> },
       { path:"events/create"     ,element: <SubCreateEvents/>},
       { path:"articles/:ArticleId/update"   ,element: <SubUpdateArticles/>},
       { path:"events/:EventId/update"   ,element: <SubUpdateEvents/>},
+      { path: "contacts", element: <SubAdminContact /> },
+      { path: "contacts/:ContactId", element: <SubAdminContactPage /> },
 
     ]
   }

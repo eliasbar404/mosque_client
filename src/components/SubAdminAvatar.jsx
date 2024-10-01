@@ -4,13 +4,14 @@ import { useMe } from "../hooks/useMe"
 import { useAdminLogin } from "../hooks/useAdminLogin"
 import { Link } from "react-router-dom"
 
-import { House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,UserCog,LogOut } from "lucide-react";
+import { House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut ,Mail} from "lucide-react";
 
 const data = [
     {icon:<House/>,        title:"Home",      link:"/subadmin/dashboard"},
     {icon:<UserRoundPen />,title:"Profile",   link:"/subadmin/dashboard/profile"},
     // {icon:<UserCog />,     title:"Admins",    link:"/subadmin/dashboard/admins"},
     {icon:<Users />,       title:"Members",   link:"/subadmin/dashboard/members"},
+    {icon:<Mail />,       title:"Contacts",   link:"/subadmin/dashboard/contacts"},
     {icon:<Newspaper />,   title:"Articles",  link:"/subadmin/dashboard/articles"},
     {icon:<PartyPopper />, title:"Events",    link:"/subadmin/dashboard/events"},
     {icon:<Settings />,    title:"Settings",  link:"/subadmin/dashboard/settings"},

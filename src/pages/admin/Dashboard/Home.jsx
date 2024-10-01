@@ -1,4 +1,4 @@
-import { UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut,UserCog} from "lucide-react";
+import { UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut,UserCog,Mail} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAdminLogin } from "../../../hooks/useAdminLogin";
 
@@ -6,9 +6,12 @@ const data = [
     {icon:<UserRoundPen size={100}/>,title:"Profile",   link:"/dashboard/profile"},
     {icon:<UserCog size={100}/>,     title:"Admins",    link:"/dashboard/admins"},
     {icon:<Users size={100}/>,       title:"Members",   link:"/dashboard/members"},
+    {icon:<Mail size={100}/>,        title:"Contacts",  link:"/dashboard/contacts"},
     {icon:<Newspaper size={100}/>,   title:"Articles",  link:"/dashboard/articles"},
     {icon:<PartyPopper size={100}/>, title:"Events",    link:"/dashboard/events"},
     {icon:<Settings size={100}/>,    title:"Settings",  link:"/dashboard/settings"},
+
+
 ];
 
 const Home = () => {

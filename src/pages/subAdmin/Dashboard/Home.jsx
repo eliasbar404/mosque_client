@@ -1,4 +1,4 @@
-import { UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut} from "lucide-react";
+import { UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,LogOut,Mail} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSubAdminLogin } from "../../../hooks/useSubAdminLogin";
 
@@ -6,6 +6,7 @@ const data = [
     {icon:<UserRoundPen size={100}/>,title:"Profile",   link:"/subadmin/dashboard/profile"},
     // {icon:<UserCog size={100}/>,     title:"Admins",    link:"/dashboard/admins"},
     {icon:<Users size={100}/>,       title:"Members",   link:"/subadmin/dashboard/members"},
+    {icon:<Mail size={100}/>,        title:"Contacts",  link:"/subadmin/dashboard/contacts"},
     {icon:<Newspaper size={100}/>,   title:"Articles",  link:"/subadmin/dashboard/articles"},
     {icon:<PartyPopper size={100}/>, title:"Events",    link:"/subadmin/dashboard/events"},
     {icon:<Settings size={100}/>,    title:"Settings",  link:"/subadmin/dashboard/settings"},
