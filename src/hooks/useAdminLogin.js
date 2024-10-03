@@ -14,44 +14,45 @@ export const useAdminLogin = () => {
 
     // Perform the login API call
     const login = async (email, password) => {
-        setLoading(true);
-        setError(null);
 
-    try {
-      
-      const response = await fetch(`http://localhost:8000/api/admin/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      setLoading(true);
+      setError(null);
 
-      if (!response.ok) {
-
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Login failed, please check your credentials!",
+      try {
+        
+        const response = await fetch(`http://localhost:8000/api/admin/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
         });
+
+        if (!response.ok) {
+
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Login failed, please check your credentials!",
+          });
+        }
+
+        const data = await response.json();
+        
+        // Store the JWT in localStorage or sessionStorage
+
+        localStorage.setItem("token", data.access_token);
+        
+
+        // Set logged-in state
+        setIsLoggedIn(true);
+      } catch (err) {
+        setError(err.message);
+        setIsLoggedIn(false);
+      } finally {
+        setLoading(false);
+        
       }
-
-      const data = await response.json();
-      
-      // Store the JWT in localStorage or sessionStorage
-
-      localStorage.setItem("token", data.access_token);
-      
-
-      // Set logged-in state
-      setIsLoggedIn(true);
-    } catch (err) {
-      setError(err.message);
-      setIsLoggedIn(false);
-    } finally {
-      setLoading(false);
-      
-    }
 
     navigate('/dashboard');
   };

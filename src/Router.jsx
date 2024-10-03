@@ -11,6 +11,8 @@ import ArticlesPage from "./pages/ArticlesPage";
 import EventsPage from "./pages/EventsPage";
 import DonsPage from "./pages/DonsPage";
 import ContactPage from "./pages/ContactPage";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
 
 // import from admin
 import Home from "./pages/admin/Dashboard/Home";
@@ -34,6 +36,7 @@ import SubArticles from "./pages/subAdmin/Dashboard/Articles";
 import SubEvents from "./pages/subAdmin/Dashboard/Events";
 import SubSettings from "./pages/subAdmin/Dashboard/Settings";
 import SubCreateArticles from "./pages/subAdmin/Dashboard/CreateArticles";
+import Register from "./pages/RegisterPage";
 
 
 
@@ -43,10 +46,12 @@ const router = createBrowserRouter([
     element: <Layout />, // Use the Layout component
     children: [
       { index: true, element: <HomePage /> },
-      { path: "/Articles", element:<ArticlesPage /> },
-      { path: "/Events", element:<EventsPage /> },
-      { path: "/Dons", element: <DonsPage /> },
-      { path: "/Contact", element:<ContactPage /> },
+      { path: "Articles", element:<ArticlesPage /> },
+      { path: "Events", element:<EventsPage /> },
+      { path: "Dons", element: <DonsPage /> },
+      { path: "Contact", element:<ContactPage /> },
+      { path: "Register", element:<RegisterPage /> },
+      { path: "Login", element:<LoginPage /> },
 
       { path: "admin", element: <AdminLogin /> },
       { path: "subadmin", element: <SubAdminLogin />},

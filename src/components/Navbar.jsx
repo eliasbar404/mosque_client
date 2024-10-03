@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Toggle } from "./ui/toggle"
 import { Sheet, SheetTrigger, SheetContent } from "./ui/sheet"
+import Logo from "../assets/Logo.png"
 
 export default function Navbar() {
   const links = [
@@ -16,12 +17,12 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white dark:border-gray-800 dark:bg-gray-950">
-      <div className="container mx-auto flex h-16 justify-between px-4 md:px-6">
-        <Link href="#" className="flex text-center text-3xl">
-          <h1 className="mt-6 font-bold">A</h1>
-          <img src="https://www.svgrepo.com/show/42588/mosque.svg" alt="" width={50} />
-          <h1 className="mt-6 font-bold">H</h1>
+    <header className="sticky top-0 z-50 w-full border-b bg-white dark:border-gray-800 dark:bg-gray-950 ">
+      <div className="flex h-16 justify-between px-4 md:px-6">
+        <Link href="#" className="flex text-center text-3xl size-10">
+          <h1 className="font-bold mt-[12px]">A</h1>
+          <img src={Logo} alt="logo" className="size-full mt-[4.5px]"/>
+          <h1 className="font-bold mt-[12px]">H</h1>
         </Link>
         <nav className="hidden items-center gap-6 text-md font-medium md:flex">
           {
@@ -39,13 +40,13 @@ export default function Navbar() {
             <span className="text-gray-500 dark:text-gray-400">123-456-7890</span>
           </div> */}
           <div className="hidden items-center gap-4 text-md font-medium md:flex">
-            <Link to="/login"
+            <Link to="/Login"
                   className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                   
                 >
                   Log in
             </Link>
-            <Link to="/register"
+            <Link to="/Register"
                   className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                   
                 >
@@ -87,7 +88,7 @@ export default function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="md:hidden">
-              <div className="grid gap-4 p-4 justify-center">
+              <div className="grid gap-4  justify-center">
               {
                 links.map(item => <Link key={item.id} to={item.path}
                   className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
@@ -177,10 +178,10 @@ function ProfileIcon(props) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor" 
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="lucide lucide-circle-user-round h-5 w-5 text-gray-500 dark:text-gray-400"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lucide lucide-circle-user-round h-5 w-5 text-gray-500 dark:text-gray-400"
     >
       <path d="M18 20a6 6 0 0 0-12 0"/>
       <circle cx="12" cy="10" r="4"/>

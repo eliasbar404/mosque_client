@@ -2,56 +2,92 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
-export const useAdminLogin = () => {
+export const useMemberLogin = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // the registeration for new members
+    const memberRegister = async (data) => {
+      
+      setLoading(true);
+      setError(null);
+
+      try {
+        
+        const response = await fetch(`http://localhost:8000/api/member/auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        const res = await response.json();
+        
+        // Store the JWT in localStorage or sessionStorage
+
+        localStorage.setItem("token", res.access_token);
+        
+
+        // Set logged-in state
+        setIsLoggedIn(true);
+      } catch (err) {
+        setError(err.message);
+        setIsLoggedIn(false);
+      } finally {
+        setLoading(false);
+        
+      }
+
+      navigate('/');
+    };
 
     // Perform the login API call
     const login = async (email, password) => {
         setLoading(true);
         setError(null);
 
-    try {
-      
-      const response = await fetch(`http://localhost:8000/api/member/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        // throw new Error("Login failed, please check your credentials.");
-        // Swal.fire("Login failed, please check your credentials!");
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Login failed, please check your credentials!",
+      try {
+        
+        const response = await fetch(`http://localhost:8000/api/member/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
         });
+
+        if (!response.ok) {
+          // throw new Error("Login failed, please check your credentials.");
+          // Swal.fire("Login failed, please check your credentials!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Login failed, please check your credentials!",
+          });
+        }
+
+        const data = await response.json();
+        
+        // Store the JWT in localStorage or sessionStorage
+
+        localStorage.setItem("token", data.access_token);
+        
+
+        // Set logged-in state
+        setIsLoggedIn(true);
+      } catch (err) {
+        setError(err.message);
+        setIsLoggedIn(false);
+      } finally {
+        setLoading(false);
+        
       }
 
-      const data = await response.json();
-      
-      // Store the JWT in localStorage or sessionStorage
-
-      localStorage.setItem("token", data.access_token);
-      
-
-      // Set logged-in state
-      setIsLoggedIn(true);
-    } catch (err) {
-      setError(err.message);
-      setIsLoggedIn(false);
-    } finally {
-      setLoading(false);
-      
-    }
-
-    navigate('/');
-  };
+      navigate('/');
+    };
 
   // Function to logout and clear the JWT
   const logout = async() => {
@@ -90,5 +126,5 @@ export const useAdminLogin = () => {
     }
   };
 
-  return { login, logout, checkAuth, isLoggedIn, loading, error };
+  return {memberRegister, login, logout, checkAuth, isLoggedIn, loading, error };
 };
