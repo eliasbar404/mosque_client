@@ -1,6 +1,6 @@
+import Sidebar from "./Dashboard/Sidebar"
 import { Outlet } from "react-router-dom"
 import SubAdminLayout from "../../layouts/SubAdminLayout"
-import Sidebar from "./Dashboard/Sidebar"
 
 const Dashboard = () => {
     return (

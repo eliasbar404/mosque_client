@@ -25,11 +25,13 @@ import { useState ,useRef} from "react";
 import {CloudUpload ,ArrowBigLeft} from 'lucide-react'
 import {Link} from 'react-router-dom'
 
-const CreateArticles = () => {
+const CreateEvents = () => {
   // const editor = useEditor()
   const [title,setTitle] = useState("");
   const [slug,setSlug]   = useState("");
   const [description,Setdescription] = useState("");
+  const [startTime,setStartTime]     = useState("");
+  const [endTime,setEndTime]         = useState("");
   const fileUploadRef = useRef(null);
   const [image, setImage] = useState(null);
 
@@ -51,9 +53,11 @@ const CreateArticles = () => {
     formData.append('slug', slug);
     formData.append('image', image);
     formData.append('description', description);
+    formData.append('start_time', startTime);
+    formData.append('end_time', endTime);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/articles`, {
+      const response = await fetch(`http://localhost:8000/api/events`, {
           method: "POST",
           headers: {
               Authorization: `Bearer ${token}`,  // Authorization header
@@ -71,11 +75,13 @@ const CreateArticles = () => {
           return;
       }
 
-      Swal.fire("Create Article successfully!");
+      Swal.fire("Create Event successfully!");
       setTitle("")
       setImageUrl("")
       setSlug("")
       Setdescription("")
+      setStartTime("")
+      setEndTime("")
       
   } catch (err) {
       console.log(err);
@@ -89,9 +95,9 @@ const CreateArticles = () => {
   }
   return (
     <div>
-        <Link to="/subadmin/dashboard/articles" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Back</span></Link>
+        <Link to="/subadmin/dashboard/events" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Back</span></Link>
       
-        <h2 className="text-center text-xl font-mono font-black p-4">Create new article Page</h2>
+        <h2 className="text-center text-xl font-mono font-black p-4">Create new Event Page</h2>
         <form className="m-10 flex flex-col gap-3" onSubmit={onSubmit}>
             {/* title */}
             <label htmlFor="title" className="flex flex-col justify-start gap-2">
@@ -102,6 +108,16 @@ const CreateArticles = () => {
             <label htmlFor="slug" className="flex flex-col justify-start gap-2">
               <span className="text-lg font-black font-mono">Slug</span>
               <Input type="text" value={slug} onChange={(e)=>setSlug(e.target.value)} id="slug" name="slug" placeholder="Slug" />
+            </label>
+            {/* Start Time */}
+            <label htmlFor="start_time" className="flex flex-col justify-start gap-2">
+              <span className="text-lg font-black font-mono">Start Time</span>
+              <Input type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} id="start_time" name="start_time" placeholder="Like That : 2024-09-14 12:34:56" />
+            </label>
+             {/* End Time */}
+            <label htmlFor="end_time" className="flex flex-col justify-start gap-2">
+                <span className="text-lg font-black font-mono">End Time</span>
+                <Input type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} id="end_time" name="end_time" placeholder="Like That : 2024-09-14 20:34:56" />
             </label>
             {/* Image */}
             <label htmlFor="image" className="flex gap-2 bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
@@ -140,4 +156,4 @@ const CreateArticles = () => {
   )
 }
 
-export default CreateArticles
+export default CreateEvents

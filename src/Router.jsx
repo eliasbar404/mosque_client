@@ -13,6 +13,7 @@ import DonsPage from "./pages/DonsPage";
 import ContactPage from "./pages/ContactPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import Register from "./pages/RegisterPage";
 
 // import from admin
 import Home from "./pages/admin/Dashboard/Home";
@@ -26,6 +27,8 @@ import CreateArticles from "./pages/admin/Dashboard/CreateArticles";
 import UpdateArticles from "./pages/admin/Dashboard/UpdateArticles";
 import CreateEvents from "./pages/admin/Dashboard/CreateEvents";
 import UpdateEvents from "./pages/admin/Dashboard/UpdateEvents";
+import AdminContact from "./pages/admin/Dashboard/Contact";
+import AdminContactPage from "./pages/admin/Dashboard/ContactPage";
 
 
 // import from subadmin
@@ -36,7 +39,12 @@ import SubArticles from "./pages/subAdmin/Dashboard/Articles";
 import SubEvents from "./pages/subAdmin/Dashboard/Events";
 import SubSettings from "./pages/subAdmin/Dashboard/Settings";
 import SubCreateArticles from "./pages/subAdmin/Dashboard/CreateArticles";
-import Register from "./pages/RegisterPage";
+import SubUpdateArticles from "./pages/subadmin/Dashboard/UpdateArticles";
+import SubCreateEvents from "./pages/subadmin/Dashboard/CreateEvents";
+import SubUpdateEvents from "./pages/subadmin/Dashboard/UpdateEvents";
+import SubAdminContact from "./pages/subAdmin/Dashboard/Contact";
+import SubAdminContactPage from "./pages/subAdmin/Dashboard/ContactPage";
+
 
 
 
@@ -53,39 +61,50 @@ const router = createBrowserRouter([
       { path: "Register", element:<RegisterPage /> },
       { path: "Login", element:<LoginPage /> },
 
-      { path: "admin", element: <AdminLogin /> },
-      { path: "subadmin", element: <SubAdminLogin />},
+      
+    ]
+  },
+  { path: "admin", element: <AdminLogin /> },
+  { path: "subadmin", element: <SubAdminLogin />},
 
-      {
-        path: "dashboard",
-        element: <Dashboard />,
-        children: [
-          { index: true, element: <Home /> },
-          { path: "profile", element: <Profile /> },
-          { path: "admins", element: <Admins /> },
-          { path: "members", element: <Users /> },
-          { path: "articles", element: <Articles /> },
-          { path: "events", element: <Events /> },
-          { path: "settings", element: <Settings /> },
-          { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
-          { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
-          { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
-        ]
-      },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "profile", element: <Profile /> },
+      { path: "admins", element: <Admins /> },
+      { path: "members", element: <Users /> },
+      { path: "articles", element: <Articles /> },
+      { path: "events", element: <Events /> },
+      { path: "settings", element: <Settings /> },
+      { path:"/dashboard/events/create"     ,element: <CreateEvents/>},
+      { path:"/dashboard/articles/:ArticleId/update"   ,element: <UpdateArticles/>},
+      { path:"/dashboard/events/:EventId/update"   ,element: <UpdateEvents/>},
+      { path: "articles/create", element: <CreateArticles /> },
+      { path: "contacts", element: <AdminContact /> },
+      { path: "contacts/:ContactId", element: <AdminContactPage /> },
+    ]
+  },
 
-      {
-        path: "subadmin/dashboard",
-        element: <SubDashboard />,
-        children: [
-          { index: true, element: <SubHome /> },
-          { path: "profile", element: <SubProfile /> },
-          { path: "users", element: <SubUsers /> },
-          { path: "articles", element: <SubArticles /> },
-          { path: "events", element: <SubEvents /> },
-          { path: "settings", element: <SubSettings /> },
-          { path: "articles/create", element: <SubCreateArticles /> },
-        ]
-      }
+  {
+    path: "subadmin/dashboard",
+    element: <SubDashboard />,
+    children: [
+      { index: true, element: <SubHome /> },
+      { path: "profile", element: <SubProfile /> },
+      { path: "members", element: <SubUsers /> },
+      { path: "articles", element: <SubArticles /> },
+      { path: "events", element: <SubEvents /> },
+      { path: "settings", element: <SubSettings /> },
+      { path: "contacts"   ,element: <SubAdminContact/>},
+      { path: "articles/create", element: <SubCreateArticles /> },
+      { path:"events/create"     ,element: <SubCreateEvents/>},
+      { path:"articles/:ArticleId/update"   ,element: <SubUpdateArticles/>},
+      { path:"events/:EventId/update"   ,element: <SubUpdateEvents/>},
+      { path: "contacts", element: <SubAdminContact /> },
+      { path: "contacts/:ContactId", element: <SubAdminContactPage /> },
+
     ]
   }
 ]);
