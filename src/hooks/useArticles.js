@@ -19,14 +19,27 @@ const fetchArticles = async () => {
 // Delete admin function
 const deleteArticle = async (articleId) => {
     Swal.fire({
-        title: "Do you want to delete the article?",
+        title: "Voulez-vous supprimer l'article?",
         showDenyButton: true,
-        confirmButtonText: "Yes",
+        confirmButtonText: "Oui",
         denyButtonText: `No`
-    }).then((result) => {
+    }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Fdelete()
+            const response = await fetch(`http://localhost:8000/api/articles/${articleId}`, {
+                method: 'DELETE',
+                headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        'Content-Type': 'application/json',
+                },
+        });
+
+        if (!response.ok) {
+                throw new Error('Failed to delete member');
+        }
+        
+        Swal.fire("Supprimé!", "", "success");
+        return response.json();
         } else if (result.isDenied) {
         //   Swal.fire("Changes are not saved", "", "info");
         }

@@ -63,16 +63,16 @@ const ContactPage = () => {
 
     return (
         <div>
-            <Link to="/dashboard/articles" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Back</span></Link>
+            <Link to="/dashboard/contacts" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Retour</span></Link>
             <div className="py-16 px-5 mt-10 flex flex-col gap-3">
-            <h4 className="font-black text-3xl">Full Name:</h4>
+            <h4 className="font-black text-3xl">Nom et Prénom:</h4>
             <h4 className="font-black text-3xl text-slate-400">{firstName+" "+lastName}</h4>
-            <h4 className="font-black text-3xl">Email:</h4>
+            <h4 className="font-black text-3xl">E-mail:</h4>
             <h4 className="font-black text-3xl text-slate-400">{email}</h4>
-            <h4 className="font-black text-3xl">Phone Number:</h4>
+            <h4 className="font-black text-3xl">Numéro de téléphone:</h4>
             <h4 className="font-black text-3xl text-slate-400">{phoneNumber}</h4>
 
-            <h4 className="font-black text-3xl">Message Body:</h4>
+            <h4 className="font-black text-3xl">Message:</h4>
             <p className="font-bold text-slate-600 p-2 border-solid border-2">{message}</p>
 
 

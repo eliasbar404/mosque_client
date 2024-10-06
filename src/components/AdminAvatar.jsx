@@ -7,14 +7,14 @@ import { Link } from "react-router-dom"
 import { House ,UserRoundPen ,Users ,Newspaper ,PartyPopper ,Settings,UserCog,LogOut ,Mail} from "lucide-react";
 
 const data = [
-    {icon:<House/>,        title:"Home",      link:"/dashboard"},
+    {icon:<House/>,        title:"Accueil",      link:"/dashboard"},
     {icon:<UserRoundPen />,title:"Profile",   link:"/dashboard/profile"},
     {icon:<UserCog />,     title:"Admins",    link:"/dashboard/admins"},
-    {icon:<Users />,       title:"Members",   link:"/dashboard/members"},
-    {icon:<Mail />,        title:"Contacts",  link:"/dashboard/contacts"},
+    {icon:<Users />,       title:"Membres",   link:"/dashboard/members"},
+    {icon:<Mail />,        title:"Messages",  link:"/dashboard/contacts"},
     {icon:<Newspaper />,   title:"Articles",  link:"/dashboard/articles"},
-    {icon:<PartyPopper />, title:"Events",    link:"/dashboard/events"},
-    {icon:<Settings />,    title:"Settings",  link:"/dashboard/settings"},
+    {icon:<PartyPopper />, title:"Événements",    link:"/dashboard/events"},
+    {icon:<Settings />,    title:"Paramètres",  link:"/dashboard/settings"},
 ];
 
 const AdminAvatar = () => {
@@ -48,7 +48,7 @@ const AdminAvatar = () => {
                 }
                 <DropdownMenuItem className="cursor-pointer" onClick={()=>logout()} >
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
+                    <span>Déconnexion</span>
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
             </DropdownMenuContent>

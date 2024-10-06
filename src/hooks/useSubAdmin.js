@@ -31,7 +31,7 @@ const createsubAdmin = async (newAdmin) => {
 
     if (!response.ok) {
        // throw new Error('Failed to create admin');
-        Swal.fire({icon: "error",title: "Oops...",text: "Failed to create a Sub admin!"});
+        Swal.fire({icon: "error",title: "Oops...",text: "Échec de la création d'un administrateur!"});
     }
 
     return response.json();

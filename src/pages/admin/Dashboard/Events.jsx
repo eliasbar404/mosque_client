@@ -29,15 +29,15 @@ if(!isLoading){
         return (
         <div className="mx-10 mt-10 text-lg flex flex-col gap-5">
             
-            <h1 className="text-3xl font-mono font-black text-center">Events List</h1>
+            <h1 className="text-3xl font-mono font-black text-center">Liste des événements</h1>
     
-            <Link className="inline-flex self-start gap-2 px-3 py-2 font-mono rounded-md font-bold text-slate-50 bg-green-500 hover:bg-green-800" to={"/dashboard/events/create"}><FilePlus />Create a new Event</Link>
+            <Link className="inline-flex self-start gap-2 px-3 py-2 font-mono rounded-md font-bold text-slate-50 bg-green-500 hover:bg-green-800" to={"/dashboard/events/create"}><FilePlus />Créer un nouvel événement</Link>
     
     {/* Search Input */}
     <div className="mt-4 mb-6">
         <input
             type="text"
-            placeholder="Search by name..."
+            placeholder="Recherche par titre..."
             className="border border-gray-400 rounded p-2 w-full"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)} // Update search query
@@ -48,10 +48,10 @@ if(!isLoading){
         <table className="min-w-full bg-white">
             <thead className="whitespace-nowrap">
                 <tr>
-                    <th className="p-4 text-left text-sm font-semibold text-black">Title</th>
-                    <th className="p-4 text-left text-sm font-semibold text-black">Start Time</th>
-                    <th className="p-4 text-left text-sm font-semibold text-black">View</th>
-                    <th className="p-4 text-left text-sm font-semibold text-black">Action</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Titre</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Heure de début</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Vues</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Actes</th>
                 </tr>
             </thead>
     
@@ -101,7 +101,7 @@ if(!isLoading){
                 {currentArticles.length === 0 && (
                     <tr>
                         <td colSpan="4" className="p-4 text-sm text-center text-gray-500">
-                            No articles found.
+                            Aucun événement trouvé.
                         </td>
                     </tr>
                 )}
@@ -110,7 +110,7 @@ if(!isLoading){
     
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-4">
-            <p className="text-sm text-gray-500">Showing {indexOfFirstUser + 1} to {Math.min(indexOfLastUser, filteredUsers.length)} of {filteredUsers.length} entries</p>
+            <p className="text-sm text-gray-500">Affichage {indexOfFirstUser + 1} à {Math.min(indexOfLastUser, filteredUsers.length)} de {filteredUsers.length} entrées</p>
             
             <ul className="flex space-x-2">
                 {Array.from({ length: totalPages }, (_, index) => (

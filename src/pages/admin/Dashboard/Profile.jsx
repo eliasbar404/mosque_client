@@ -119,7 +119,7 @@ const Profile = () => {
 
     return loading? <div>Loading...</div>: (
     <div className="p-5">
-        <h3 className="text-center font-black font-mono text-2xl">Profile Page</h3>
+        <h3 className="text-center font-black font-mono text-2xl">Page De Profil</h3>
 
         <form className="flex flex-col items-center" onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
             <div className="mt-10 w-[200px] h-[200px]">
@@ -128,13 +128,13 @@ const Profile = () => {
             <div className="p-10 flex flex-col gap-5">
                             {/* Email */}
             <label htmlFor="email" className="flex flex-col gap-1">
-                <span className="font-black font-mono text-xl">Email</span>
-                <input defaultValue={user.email} {...register("email", { required: true })} type="email" name="email" id="email" className="border-2 w-96 h-10 rounded-md px-2"/>
+                <span className="font-black font-mono text-xl">E-mail</span>
+                <input defaultValue={user.email} {...register("email", { required: true })} type="email" name="E-mail" id="email" className="border-2 w-96 h-10 rounded-md px-2"/>
             </label>
             {/* Name */}
             <label htmlFor="name" className="flex flex-col gap-1">
-                <span className="font-black font-mono text-xl">Name</span>
-                <input defaultValue={user.name} {...register("name", { required: true })} type="text" name="name" id="name" className="border-2 w-96 h-10 rounded-md px-2"/>
+                <span className="font-black font-mono text-xl">Nom</span>
+                <input defaultValue={user.name} {...register("name", { required: true })} type="text" name="Nom" id="name" className="border-2 w-96 h-10 rounded-md px-2"/>
             </label>
             {/* Phone Number */}
             {/* <label htmlFor="phone_number" className="flex flex-col gap-1">
@@ -143,39 +143,39 @@ const Profile = () => {
             </label> */}
             {/* Profile Picture */}
             <label htmlFor="profile_picture" className="flex flex-col gap-1">
-                <span className="font-black font-mono text-xl">Profile Picture</span>
+                <span className="font-black font-mono text-xl">Photo De Profil</span>
                 <input type="file" ref={fileUploadRef} onChange={uploadImageDisplay} className="border-2 w-96 h-10 rounded-md"/>
             </label>
 
             </div>
 
             <button type="submit" className="bg-blue-500 font-black font-mono text-slate-50 rounded-md px-10 py-3 text-xl hover:bg-blue-800">
-                Update Profile
+                Mettre à Jour Le Profil
             </button>
 
         </form>
 
 
         <form onSubmit={PasswordSubmit} className="flex flex-col items-center gap-3 justify-center mt-20">
-            <h6 className="font-mono font-black text-3xl underline">Change Password</h6>
+            <h6 className="font-mono font-black text-3xl underline">Changer le mot de passe</h6>
             {/* Current Password */}
             <label htmlFor="current_password" className="flex flex-col gap-1 mt-11">
-                <span className="font-black font-mono text-xl">Current Password</span>
+                <span className="font-black font-mono text-md">Mot de passe actuel</span>
                 <input  type="password" value={current_password} onChange={(e)=>SetCurrent_password(e.target.value)} name="current_password" id="current_password" className="border-2 w-96 h-10 rounded-md px-2"/>
             </label>
             {/* New password */}
             <label htmlFor="new_password" className="flex flex-col gap-1">
-                <span className="font-black font-mono text-xl">New Password</span>
+                <span className="font-black font-mono text-md">Nouveau mot de passe</span>
                 <input  type="password" value={new_password} onChange={(e)=>SetNew_password(e.target.value)} name="new_password" id="new_password" className="border-2 w-96 h-10 rounded-md px-2"/>
             </label>
             {/* new password confrimation */}
             <label htmlFor="new_password_confirmation" className="flex flex-col gap-1">
-                <span className="font-black font-mono text-xl">New Password Confirmation</span>
+                <span className="font-black font-mono text-md">Confirmation du nouveau mot de passe</span>
                 <input  type="password" value={new_password_confirmation} onChange={(e)=>SetNew_password_confirmation(e.target.value)} name="new_password_confirmation" id="new_password_confirmation" className="border-2 w-96 h-10 rounded-md px-2"/>
             </label>
 
             <button type="submit" className="bg-blue-500 mt-5 font-black font-mono text-slate-50 rounded-md px-10 py-3 text-xl hover:bg-blue-800">
-                Update Password
+            Mettre à jour le mot de passe
             </button>
         </form>
     </div>

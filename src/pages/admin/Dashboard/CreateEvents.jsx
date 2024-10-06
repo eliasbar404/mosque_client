@@ -95,13 +95,13 @@ const CreateEvents = () => {
   }
   return (
     <div>
-        <Link to="/dashboard/events" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Back</span></Link>
+        <Link to="/dashboard/events" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Retour</span></Link>
       
-        <h2 className="text-center text-xl font-mono font-black p-4">Create new Event Page</h2>
+        <h2 className="text-center text-xl font-mono font-black p-4">Créer un nouvel événement</h2>
         <form className="m-10 flex flex-col gap-3" onSubmit={onSubmit}>
             {/* title */}
             <label htmlFor="title" className="flex flex-col justify-start gap-2">
-              <span className="text-lg font-black font-mono">Title</span>
+              <span className="text-lg font-black font-mono">Titre</span>
               <Input type="text" value={title} onChange={(e)=>setTitle(e.target.value)} id="title" name="title" placeholder="Title" />
             </label>
             {/* slug */}
@@ -111,18 +111,18 @@ const CreateEvents = () => {
             </label>
             {/* Start Time */}
             <label htmlFor="start_time" className="flex flex-col justify-start gap-2">
-              <span className="text-lg font-black font-mono">Start Time</span>
+              <span className="text-lg font-black font-mono">Heure de début</span>
               <Input type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} id="start_time" name="start_time" placeholder="Like That : 2024-09-14 12:34:56" />
             </label>
              {/* End Time */}
             <label htmlFor="end_time" className="flex flex-col justify-start gap-2">
-                <span className="text-lg font-black font-mono">End Time</span>
+                <span className="text-lg font-black font-mono">Heure de fin</span>
                 <Input type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} id="end_time" name="end_time" placeholder="Like That : 2024-09-14 20:34:56" />
             </label>
             {/* Image */}
             <label htmlFor="image" className="flex gap-2 bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
                 <CloudUpload />
-                <span className="font-mono">Upload Images</span>
+                <span className="font-mono">Télécharger des images</span>
                 <input type="file" ref={fileUploadRef} id='image' className="hidden" onChange={uploadImageDisplay}/>
             </label>
             {/* Display Image */}
@@ -139,7 +139,7 @@ const CreateEvents = () => {
             <FroalaEditorComponent tag='textarea'  id="description" model={description} onModelChange={Setdescription} />
 
 
-            <button type="submit" className="bg-green-500 self-center text-xl font-mono font-black px-10 py-2 text-slate-50 mt-5 hover:bg-green-800">Submit</button>
+            <button type="submit" className="bg-green-500 self-center text-xl font-mono font-black px-10 py-2 text-slate-50 mt-5 hover:bg-green-800">Sauvegarder</button>
 
     
 

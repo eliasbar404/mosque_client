@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useAdminLogin } from "../../../hooks/useAdminLogin";
 
 const data = [
-    {icon:<UserRoundPen size={100}/>,title:"Profile",   link:"/dashboard/profile"},
+    {icon:<UserRoundPen size={100}/>,title:"Profil",   link:"/dashboard/profile"},
     {icon:<UserCog size={100}/>,     title:"Admins",    link:"/dashboard/admins"},
-    {icon:<Users size={100}/>,       title:"Members",   link:"/dashboard/members"},
-    {icon:<Mail size={100}/>,        title:"Contacts",  link:"/dashboard/contacts"},
+    {icon:<Users size={100}/>,       title:"Membres",   link:"/dashboard/members"},
+    {icon:<Mail size={100}/>,        title:"Messages",  link:"/dashboard/contacts"},
     {icon:<Newspaper size={100}/>,   title:"Articles",  link:"/dashboard/articles"},
-    {icon:<PartyPopper size={100}/>, title:"Events",    link:"/dashboard/events"},
-    {icon:<Settings size={100}/>,    title:"Settings",  link:"/dashboard/settings"},
+    {icon:<PartyPopper size={100}/>, title:"Événements",    link:"/dashboard/events"},
+    {icon:<Settings size={100}/>,    title:"Paramètres",  link:"/dashboard/settings"},
 
 
 ];
@@ -28,7 +28,7 @@ const Home = () => {
 
             <Link onClick={()=>logout()}  className="inline-flex flex-col items-center justify-center bg-white p-2 w-[200px] h-[200px] rounded-lg transition-all hover:bg-blue-400 hover:text-slate-50 hover:scale-110" >
                 <span><LogOut size={100}/></span>
-                <span className="font-mono font-black text-2xl">Logout</span>
+                <span className="font-mono font-black text-2xl">Déconnexion</span>
             </Link>
     </div>
 )

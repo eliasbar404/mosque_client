@@ -30,7 +30,7 @@ const Contact = () => {
         return (
             <div className="mx-10 mt-10 text-lg flex flex-col gap-5">
             
-            <h1 className="text-3xl font-mono font-black text-center">Contat Messages List</h1>
+            <h1 className="text-3xl font-mono font-black text-center">Liste des messages de contact</h1>
     
             {/* <Link className="inline-flex self-start gap-2 px-3 py-2 font-mono rounded-md font-bold text-slate-50 bg-green-500 hover:bg-green-800" to={"/dashboard/articles/create"}><FilePlus />Create a new Article</Link> */}
     
@@ -38,7 +38,7 @@ const Contact = () => {
     <div className="mt-4 mb-6">
         <input
             type="text"
-            placeholder="Search by name..."
+            placeholder="Recherche Par Nom..."
             className="border border-gray-400 rounded p-2 w-full"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)} // Update search query
@@ -49,10 +49,10 @@ const Contact = () => {
         <table className="min-w-full bg-white">
             <thead className="whitespace-nowrap">
                 <tr>
-                    <th className="p-4 text-left text-sm font-semibold text-black">Name</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Nom</th>
                     {/* <th className="p-4 text-left text-sm font-semibold text-black">Published At</th> */}
-                    <th className="p-4 text-left text-sm font-semibold text-black">Email</th>
-                    <th className="p-4 text-left text-sm font-semibold text-black">Phone Number</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">E-mail</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Numéro de téléphone</th>
                 </tr>
             </thead>
     
@@ -75,10 +75,10 @@ const Contact = () => {
                             <td className="p-4 flex gap-1 mt-4">
                                 
                                 {/* Edit */}
-                                <Link to={`/dashboard/contacts/${val.id}`} title='Edit' className="inline">
+                                <Link to={`/dashboard/contacts/${val.id}`} title='Détails Du Message' className="inline">
                                     <FilePenLine color='blue' size={30}/>
                                 </Link>
-                                <button title="Delete" onClick={()=>removeContact(val.id)}>
+                                <button title="Supprimer" onClick={()=>removeContact(val.id)}>
                                     <Trash2 color='red' size={30}/>
                                 </button>
     
@@ -91,7 +91,7 @@ const Contact = () => {
                 {currentContacts.length === 0 && (
                     <tr>
                         <td colSpan="4" className="p-4 text-sm text-center text-gray-500">
-                            No articles found.
+                        Aucun message trouvé.
                         </td>
                     </tr>
                 )}
@@ -100,7 +100,7 @@ const Contact = () => {
     
         {/* Pagination Controls */}
         <div className="flex justify-between items-center mt-4">
-            <p className="text-sm text-gray-500">Showing {indexOfFirstContact + 1} to {Math.min(indexOfLastContat, filteredContacts.length)} of {filteredContacts.length} entries</p>
+            <p className="text-sm text-gray-500">Affichage {indexOfFirstContact + 1} à {Math.min(indexOfLastContat, filteredContacts.length)} de {filteredContacts.length} entrées</p>
             
             <ul className="flex space-x-2">
                 {Array.from({ length: totalPages }, (_, index) => (

@@ -3,6 +3,14 @@ import { useState } from 'react';
 import { useMembers } from '../../../hooks/useMembers';
 import { Power,PowerOff ,Trash2} from 'lucide-react'
 
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+  } from "../../../components/ui/hover-card"
+
+
+
 
 
 const Users = () => {
@@ -32,13 +40,13 @@ const Users = () => {
 
     return (
         <div className="mx-10 mt-10 text-lg">
-            <h1 className="font-bold text-3xl font-mono text-center">Users List</h1>
+            <h1 className="font-bold text-3xl font-mono text-center">Liste Des Membres</h1>
 
             {/* Search Input */}
             <div className="mt-4 mb-6">
                 <input
                     type="text"
-                    placeholder="Search by name..."
+                    placeholder="Rechercher par nom..."
                     className="border border-gray-400 rounded p-2 w-full"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} // Update search query
@@ -49,10 +57,10 @@ const Users = () => {
                 <table className="min-w-full bg-white">
                     <thead className="whitespace-nowrap">
                         <tr>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Name</th>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Phone number</th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Nom</th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Numéro de téléphone</th>
                             <th className="p-4 text-left text-sm font-semibold text-black">Active</th>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Action</th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Actes</th>
                         </tr>
                     </thead>
 
@@ -64,7 +72,31 @@ const Users = () => {
                                         <div className="flex items-center cursor-pointer w-max">
                                             <img src={val.profile_picture_url?`http://localhost:8000/${val.profile_picture_url}`:`https://cdn-icons-png.flaticon.com/512/953/953789.png`} className="w-9 h-9 rounded-full shrink-0" />
                                             <div className="ml-4">
-                                                <p className="text-sm text-black">{val.last_name} {val.first_name}</p>
+                                                <p className="text-sm text-black">
+                                                    <HoverCard>
+                                                        <HoverCardTrigger asChild>
+                                                            <span>{val.last_name} {val.first_name}</span>
+                                                        </HoverCardTrigger>
+                                                        <HoverCardContent className="w-80 flex flex-col">
+                                                            {/* Nom */}
+                                                            <label htmlFor="" className='font-black font-mono text-slate-400 text-2xl'>Nom:</label>
+                                                            <span className='font-bold text-xl'>{val.last_name} {val.first_name}</span>
+                                                            {/* Address */}
+                                                            <label htmlFor="" className='font-black font-mono text-slate-400 text-2xl'>Adresse:</label>
+                                                            <span className='font-bold text-xl'>{val.address ? val.address : "Null"}</span>
+                                                            {/* Phone Number */}
+                                                            <label htmlFor="" className='font-black font-mono text-slate-400 text-2xl'>Numéro De Téléphone:</label>
+                                                            <span className='font-bold text-xl'>{val.phone_number ? val.phone_number : "Null"}</span>
+                                                            {/* City */}
+                                                            <label htmlFor="" className='font-black font-mono text-slate-400 text-2xl'>Ville:</label>
+                                                            <span className='font-bold text-xl'>{val.city ? val.city : "Null"}</span>
+                                                            {/* Code Postal */}
+                                                            <label htmlFor="" className='font-black font-mono text-slate-400 text-2xl'>Code Postal:</label>
+                                                            <span className='font-bold text-xl'>{val.code_postal ? val.code_postal : "Null"}</span>
+                                                            
+                                                        </HoverCardContent>
+                                                    </HoverCard>
+                                                </p>
                                                 <p className="text-xs text-gray-500 mt-0.5">{val.email}</p>
                                             </div>
                                         </div>
@@ -102,7 +134,7 @@ const Users = () => {
 
                 {/* Pagination Controls */}
                 <div className="flex justify-between items-center mt-4">
-                    <p className="text-sm text-gray-500">Showing {indexOfFirstUser + 1} to {Math.min(indexOfLastUser, filteredUsers.length)} of {filteredUsers.length} entries</p>
+                    <p className="text-sm text-gray-500">Affichage {indexOfFirstUser + 1} à {Math.min(indexOfLastUser, filteredUsers.length)} de {filteredUsers.length} entrées</p>
                     
                     <ul className="flex space-x-2">
                         {Array.from({ length: totalPages }, (_, index) => (

@@ -24,14 +24,20 @@ export const useSubAdminLogin = () => {
       });
 
       if (!response.ok) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Login failed, please check your credentials!",
-        });
+        const data = await response.json();
+        // if(data.error === "vérifiez votre email ou votre mot de passe"){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: data.error,
+          });
+        // }
+
       }
+      // console.log()
 
       const data = await response.json();
+      // console.log(data)
       
       // Store the JWT in localStorage or sessionStorage
 

@@ -42,27 +42,27 @@ if (error) return <p>Error loading admins: {error.message}</p>;
 
 return (
     <div className="mx-5">
-        <h3 className="font-mono font-black text-center mt-5 text-xl">SUB Admins List</h3>
+        <h3 className="font-mono font-black text-center mt-5 text-xl">Liste Des Administrateurs</h3>
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline" className="bg-green-400 text-slate-50 hover:bg-green-600 hover:text-slate-50">Add New</Button>
+                <Button variant="outline" className="bg-green-400 text-slate-50 hover:bg-green-600 hover:text-slate-50">Ajouter un nouveau</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader><DialogTitle className="text-center">Create New SUB Admin</DialogTitle></DialogHeader>
+                <DialogHeader><DialogTitle className="text-center">Ajouter un nouveau Admin</DialogTitle></DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 py-4">
-                    <Input id="name"           placeholder="Name"                  className="" {...register("name", { required: true })}/>
-                    <Input id="email"          placeholder="Email"                 className="" {...register("email", { required: true })}/>
-                    <Input id="phone_number"   placeholder="Phone Number"          className="" {...register("phone_number", { required: true })}/>
-                    <Input id="password"       placeholder="Password"              className="" {...register("password", { required: true })}/>
-                    <Input id="password_conf"  placeholder="Password Confirmation" className="" {...register("password_confirmation", { required: true })}/>
-                    <Button type="submit" className="bg-blue-500 hover:bg-blue-700">Save</Button>
+                    <Input id="name"           placeholder="Nom"                  className="" {...register("name", { required: true })}/>
+                    <Input id="email"          placeholder="E-mail"                 className="" {...register("email", { required: true })}/>
+                    <Input id="phone_number"   placeholder="Numéro de téléphone"          className="" {...register("phone_number", { required: true })}/>
+                    <Input id="password"       placeholder="Mot de passe"              className="" {...register("password", { required: true })}/>
+                    <Input id="password_conf"  placeholder="Confirmation du mot de passe" className="" {...register("password_confirmation", { required: true })}/>
+                    <Button type="submit" className="bg-blue-500 hover:bg-blue-700">Sauvegarder</Button>
                 </form>
             </DialogContent>
         </Dialog>
         <div className="mt-4 mb-6">
                 <input
                     type="text"
-                    placeholder="Search by name..."
+                    placeholder="Rechercher par nom..."
                     className="border border-gray-400 rounded p-2 w-full"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} // Update search query
@@ -73,10 +73,10 @@ return (
                 <table className="min-w-full bg-white">
                     <thead className="whitespace-nowrap">
                         <tr>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Name</th>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Phone number</th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Nom</th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Numéro de téléphone</th>
                             <th className="p-4 text-left text-sm font-semibold text-black">Active</th>
-                            <th className="p-4 text-left text-sm font-semibold text-black">Action</th>
+                            <th className="p-4 text-left text-sm font-semibold text-black">Actes</th>
                         </tr>
                     </thead>
 
@@ -118,7 +118,7 @@ return (
                         {currentUsers.length === 0 && (
                             <tr>
                                 <td colSpan="4" className="p-4 text-sm text-center text-gray-500">
-                                    No users found.
+                                Aucun administrateur trouvé.
                                 </td>
                             </tr>
                         )}
@@ -127,7 +127,7 @@ return (
 
                 {/* Pagination Controls */}
                 <div className="flex justify-between items-center mt-4">
-                    <p className="text-sm text-gray-500">Showing {indexOfFirstUser + 1} to {Math.min(indexOfLastUser, filteredUsers.length)} of {filteredUsers.length} entries</p>
+                    <p className="text-sm text-gray-500">Affichage {indexOfFirstUser + 1} à {Math.min(indexOfLastUser, filteredUsers.length)} de {filteredUsers.length} entrées</p>
                     
                     <ul className="flex space-x-2">
                         {Array.from({ length: totalPages }, (_, index) => (

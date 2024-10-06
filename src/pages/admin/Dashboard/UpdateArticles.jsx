@@ -129,18 +129,18 @@ const UpdateArticles = () => {
 
     return (
         <div>
-            <Link to="/dashboard/articles" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Back</span></Link>
+            <Link to="/dashboard/articles" className="flex items-center"><ArrowBigLeft size={80} className="p-2"/> <span className="font-mono font-black text-2xl">Retour</span></Link>
             
             {article ? <span></span> : <span>No article found</span>}
             {article &&     <div>
                 
 
     
-        <h2 className="text-center text-xl font-mono font-black p-4">Update Article {article.id}</h2>
+        <h2 className="text-center text-xl font-mono font-black p-4">Mettre à jour l'article {article.id}</h2>
         <form className="m-10 flex flex-col gap-3" onSubmit={OnUpdate}>
             {/* title */}
             <label htmlFor="title" className="flex flex-col justify-start gap-2">
-                <span className="text-lg font-black font-mono">Title</span>
+                <span className="text-lg font-black font-mono">Titre</span>
                 <Input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}  id="title" name="title" placeholder="Title" />
             </label>
             {/* slug */}
@@ -151,7 +151,7 @@ const UpdateArticles = () => {
             {/* Image */}
             <label htmlFor="image" className="flex gap-2 bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
                 <CloudUpload />
-                <span className="font-mono">Upload Images</span>
+                <span className="font-mono">Télécharger une image</span>
                 <input type="file" ref={fileUploadRef} id='image' className="hidden" onChange={uploadImageDisplay}/>
             </label>
             {/* Display Image */}
@@ -163,7 +163,7 @@ const UpdateArticles = () => {
             <FroalaEditorComponent tag='textarea'  id="description" model={description}  onModelChange={setDescription}/>
 
 
-            <button type="submit" className="bg-green-500 self-center text-xl font-mono font-black px-10 py-2 text-slate-50 mt-5 hover:bg-green-800">Update</button>
+            <button type="submit" className="bg-green-500 self-center text-xl font-mono font-black px-10 py-2 text-slate-50 mt-5 hover:bg-green-800">Mise à jour</button>
 
         </form>
 

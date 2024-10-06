@@ -29,11 +29,12 @@ export const useAdminLogin = () => {
         });
 
         if (!response.ok) {
+          const data = await response.json();
 
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Login failed, please check your credentials!",
+            text: data.error,
           });
         }
 
