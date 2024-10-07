@@ -10,6 +10,7 @@ import 'font-awesome/css/font-awesome.css';
 import 'froala-editor/js/third_party/font_awesome.min.js';
 
 import axios from 'axios';
+import {Trash2} from "lucide-react"
             
 
 
@@ -167,6 +168,9 @@ const UpdateArticles = () => {
 
         </form>
 
+
+        <CommentsList articleID = {ArticleId}/>
+
     </div>}
 
 </div>
@@ -174,3 +178,133 @@ const UpdateArticles = () => {
 };
 
 export default UpdateArticles;
+
+
+
+const CommentsList = ({articleID})=>{
+    const [comments,setComments] = useState([]);
+
+
+    const [currentPage, setCurrentPage] = useState(1);
+    // eslint-disable-next-line no-unused-vars
+    const [articlesPerPage, setArticlesPerPage] = useState(10);
+
+            // Calculate the users to display based on pagination
+            const indexOfLastUser = currentPage * articlesPerPage;
+            const indexOfFirstUser = indexOfLastUser - articlesPerPage;
+            const currentArticles = comments.slice(indexOfFirstUser, indexOfLastUser);
+        
+            const totalPages = Math.ceil(comments.length / articlesPerPage);
+                    // Handle page change
+        const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    
+    useEffect(() => {
+        FetchComments()
+
+    }, [articleID]);
+
+    // Fetch comments function
+    const FetchComments = async()=>{
+        const response = await fetch(`http://localhost:8000/api/articles/${articleID}/comments`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json();
+        setComments(data);
+    }
+
+    // delete  comment
+
+    const DeleteComment = async(commentID)=>{
+        const response = await fetch(`http://localhost:8000/api/articles/comment/${commentID}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if(response.ok){
+            window.location.reload()
+        }
+
+    }
+
+
+    
+    return(
+        <div className='font-[sans-serif] overflow-x-auto w-[90%] mx-auto'>
+        <table className="min-w-full bg-white">
+            <thead className="whitespace-nowrap">
+                <tr>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Commentaire</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Nom</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Actes</th>
+                </tr>
+            </thead>
+    
+            <tbody className="whitespace-nowrap">
+                {
+                    comments.map((val, index) => (
+                        <tr key={index} className="odd:bg-blue-50">
+                            <td className="p-4 text-sm">
+                                <div className="flex items-center cursor-pointer w-max">
+                                        {val.comment}
+                                </div>
+                            </td>
+
+                            <td className="p-4 text-sm">
+                                <div className="flex items-center cursor-pointer w-max">
+                                        {val.member.first_name} {val.member.last_name}
+                                </div>
+                            </td>
+
+
+                            <td className="p-4 flex gap-1 mt-4">
+
+                            
+                                <button title="Delete" onClick={()=>DeleteComment(val.id)}>
+                                
+                                    <Trash2 color='red' size={30}/>
+                                </button>
+    
+    
+                            </td>
+                        </tr>
+                    ))
+                }
+    
+                {currentArticles.length === 0 && (
+                    <tr>
+                        <td colSpan="4" className="p-4 text-sm text-center text-gray-500">
+                        Aucun commentaire trouvé.
+                        </td>
+                    </tr>
+                )}
+            </tbody>
+        </table>
+
+                {/* Pagination Controls */}
+                <div className="flex justify-between items-center mt-4">
+            <p className="text-sm text-gray-500">Affichage {indexOfFirstUser + 1} à {Math.min(indexOfLastUser, comments.length)} de {comments.length} entrées</p>
+            
+            <ul className="flex space-x-2">
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <li
+                        key={index + 1}
+                        className={`cursor-pointer text-sm px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        onClick={() => paginate(index + 1)}
+                    >
+                        {index + 1}
+                    </li>
+                ))}
+            </ul>
+        </div>
+        </div>
+    )
+}

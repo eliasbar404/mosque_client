@@ -10,6 +10,7 @@ import 'font-awesome/css/font-awesome.css';
 import 'froala-editor/js/third_party/font_awesome.min.js';
 
 import axios from 'axios';
+import {Trash2,X,Check} from "lucide-react"
             
 
 
@@ -184,6 +185,9 @@ const UpdateEvents = () => {
 
         </form>
 
+
+        <MembersList EventId={EventId}/>
+
     </div>}
 
 </div>
@@ -191,3 +195,163 @@ const UpdateEvents = () => {
 };
 
 export default UpdateEvents;
+
+
+
+
+
+
+
+
+
+
+
+const MembersList = ({EventId})=>{
+    const [eventMembers,setEventMembers] = useState([]);
+
+
+    const [currentPage, setCurrentPage] = useState(1);
+    // eslint-disable-next-line no-unused-vars
+    const [articlesPerPage, setArticlesPerPage] = useState(10);
+
+            // Calculate the users to display based on pagination
+            const indexOfLastUser = currentPage * articlesPerPage;
+            const indexOfFirstUser = indexOfLastUser - articlesPerPage;
+            const currentArticles = eventMembers.slice(indexOfFirstUser, indexOfLastUser);
+        
+            const totalPages = Math.ceil(eventMembers.length / articlesPerPage);
+                    // Handle page change
+        const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    
+    useEffect(() => {
+        FetchComments()
+
+    }, [EventId]);
+
+    // Fetch comments function
+    const FetchComments = async()=>{
+        const response = await fetch(`http://localhost:8000/api/events/${EventId}/join/members`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json();
+        setEventMembers(data[0]["members"]);
+        // console.log(data[0]["members"])
+    }
+
+    // delete  comment
+
+    const EventMemberStatus = async(EventMemberID,data)=>{
+        const response = await fetch(`http://localhost:8000/api/events/join/${EventMemberID}/status`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                status: data
+            })
+        });
+
+        if(response.ok){
+            window.location.reload()
+        }
+
+    }
+
+
+    
+    return(
+        <div className='font-[sans-serif] overflow-x-auto w-[90%] mx-auto'>
+            <h4 className='font-mono font-extrabold text-center text-xl m-3'>membres inscrits à l'événement</h4>
+        <table className="min-w-full bg-white">
+            <thead className="whitespace-nowrap">
+                <tr>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Nom</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Note</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Statut</th>
+                    <th className="p-4 text-left text-sm font-semibold text-black">Actes</th>
+                </tr>
+            </thead>
+    
+            <tbody className="whitespace-nowrap">
+                {
+                    eventMembers.map((val, index) => (
+                        <tr key={index} className="odd:bg-blue-50">
+                                    <td className="p-4 text-sm">
+                                        <div className="flex items-center cursor-pointer w-max">
+                                            <img src={`http://localhost:8000/${val.profile_picture_url}`} className="w-9 h-9 rounded-full shrink-0" />
+                                            <div className="ml-4">
+                                                <p className="text-sm text-black">{val.first_name} {val.last_name}</p>
+                                                <p className="text-xs text-gray-500 mt-0.5">{val.phone_number}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                            <td className="p-4 text-sm">
+                                <div className="flex items-center cursor-pointer w-max">
+                                {val.pivot.note}
+                                </div>
+                            </td>
+
+                            <td className="p-4 text-sm">
+                                <div className="flex items-center cursor-pointer w-max">
+                                {val.pivot.status == "pending"?"en attente":val.pivot.status == "rejected"?"rejeté":"accepté"}
+                                </div>
+                            </td>
+
+
+                            <td className="p-4 flex gap-1 mt-4">
+                            {/* <X /> */}
+                            {
+                                (val.pivot.status == "pending" || val.pivot.status == "accepted") && <button title="reject" onClick={()=>EventMemberStatus(val.pivot.id,"rejected")}><X color='red' size={30}/></button>
+                            }
+                                
+                            {
+                                (val.pivot.status == "pending" || val.pivot.status == "rejected") && <button title="accept" onClick={()=>EventMemberStatus(val.pivot.id,"accepted")}><Check color='green' size={30}/></button>
+                            }
+
+                                {/* <button title="Delete" onClick={()=>DeleteComment(val.id)}>
+                                    <Trash2 color='red' size={30}/>
+                                </button> */}
+    
+    
+                            </td>
+                        </tr>
+                    ))
+                }
+    
+                {currentArticles.length === 0 && (
+                    <tr>
+                        <td colSpan="4" className="p-4 text-sm text-center text-gray-500">
+                        Aucun commentaire trouvé.
+                        </td>
+                    </tr>
+                )}
+            </tbody>
+        </table>
+
+                {/* Pagination Controls */}
+                <div className="flex justify-between items-center mt-4">
+            <p className="text-sm text-gray-500">Affichage {indexOfFirstUser + 1} à {Math.min(indexOfLastUser, eventMembers.length)} de {eventMembers.length} entrées</p>
+            
+            <ul className="flex space-x-2">
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <li
+                        key={index + 1}
+                        className={`cursor-pointer text-sm px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        onClick={() => paginate(index + 1)}
+                    >
+                        {index + 1}
+                    </li>
+                ))}
+            </ul>
+        </div>
+        </div>
+    )
+}
